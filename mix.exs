@@ -38,9 +38,11 @@ defmodule Sonet.MixProject do
       {:ash, ">= 0.0.0"},
       {:ash_authentication, ">= 0.0.0"},
       {:ash_authentication_phoenix, ">= 0.0.0"},
+      {:ash_json_api, ">= 0.0.0"},
       {:ash_phoenix, ">= 0.0.0"},
       {:ash_postgres, ">= 0.0.0"},
       {:igniter, ">= 0.0.0"},
+      {:open_api_spex, ">= 0.0.0"},
       {:picosat_elixir, ">= 0.0.0"},
       # phoenix deps
       {:phoenix, ">= 0.0.0"},
