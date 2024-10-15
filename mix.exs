@@ -35,6 +35,7 @@ defmodule Sonet.MixProject do
     [
       # ash deps
       {:ash, ">= 0.0.0"},
+      {:ash_postgres, ">= 0.0.0"},
       {:igniter, ">= 0.0.0"},
       {:picosat_elixir, ">= 0.0.0"},
       # phoenix deps
@@ -79,14 +80,15 @@ defmodule Sonet.MixProject do
       setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      test: ["ash.setup --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind sonet", "esbuild sonet"],
       "assets.deploy": [
         "tailwind sonet --minify",
         "esbuild sonet --minify",
         "phx.digest"
-      ]
+      ],
+      "ash.setup": ["ash.setup", "run priv/repo/seeds.exs"]
     ]
   end
 end
