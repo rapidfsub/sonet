@@ -35,6 +35,7 @@ defmodule Sonet.MixProject do
     [
       # ash deps
       {:ash, ">= 0.0.0"},
+      {:ash_authentication, ">= 0.0.0"},
       {:ash_phoenix, ">= 0.0.0"},
       {:ash_postgres, ">= 0.0.0"},
       {:igniter, ">= 0.0.0"},

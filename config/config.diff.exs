@@ -10,6 +10,8 @@ config :spark,
     remove_parens?: true,
     "Ash.Resource": [
       section_order: [
+        :authentication,
+        :tokens,
         :postgres,
         :resource,
         :code_interface,
@@ -29,3 +31,5 @@ config :spark,
     ],
     "Ash.Domain": [section_order: [:resources, :policies, :authorization, :domain, :execution]]
   ]
+
+config :sonet, ash_domains: [Sonet.Accounts]

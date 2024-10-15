@@ -115,3 +115,10 @@ if config_env() == :prod do
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 end
+
+if config_env() == :prod do
+  config :sonet,
+    token_signing_secret:
+      System.get_env("TOKEN_SIGNING_SECRET") ||
+        raise("Missing environment variable `TOKEN_SIGNING_SECRET`!")
+end

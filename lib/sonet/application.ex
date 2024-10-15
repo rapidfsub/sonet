@@ -17,7 +17,8 @@ defmodule Sonet.Application do
       # Start a worker by calling: Sonet.Worker.start_link(arg)
       # {Sonet.Worker, arg},
       # Start to serve requests, typically the last entry
-      SonetWeb.Endpoint
+      SonetWeb.Endpoint,
+      {AshAuthentication.Supervisor, [otp_app: :sonet]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
