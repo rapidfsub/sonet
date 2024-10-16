@@ -43,7 +43,7 @@ defmodule SonetWeb do
         layouts: [html: SonetWeb.Layouts]
 
       import Plug.Conn
-      import SonetWeb.Gettext
+      use Gettext, backend: SonetWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -85,7 +85,7 @@ defmodule SonetWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import SonetWeb.CoreComponents
-      import SonetWeb.Gettext
+      use Gettext, backend: SonetWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

@@ -18,6 +18,17 @@ defmodule SonetWeb.Router do
     plug :load_from_bearer
   end
 
+  scope "/api/json" do
+    pipe_through [:api]
+
+    forward "/swaggerui",
+            OpenApiSpex.Plug.SwaggerUI,
+            path: "/api/json/open_api",
+            default_model_expand_depth: 4
+
+    forward "/", SonetWeb.AshJsonApiRouter
+  end
+
   scope "/", SonetWeb do
     ash_authentication_live_session :authenticated_routes do
       # in each liveview, add one of the following at the top of the module:
