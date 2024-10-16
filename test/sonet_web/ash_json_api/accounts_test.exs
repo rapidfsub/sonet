@@ -46,7 +46,9 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
         }
       })
 
-    assert %{"data" => %{"attributes" => attributes}} = json_response(conn, 201)
-    assert attributes["email"] == email
+    assert %{
+             "data" => %{"attributes" => %{"email" => ^email}},
+             "meta" => %{"token" => <<_token::binary>>}
+           } = json_response(conn, 201)
   end
 end
