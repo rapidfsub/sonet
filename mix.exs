@@ -8,7 +8,7 @@ defmodule Sonet.MixProject do
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      consolidate_protocols: Mix.env() != :dev,
+      consolidate_protocols: Mix.env() not in [:dev, :test],
       aliases: aliases(),
       deps: deps()
     ]
