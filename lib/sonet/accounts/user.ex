@@ -3,11 +3,18 @@ defmodule Sonet.Accounts.User do
     otp_app: :sonet,
     domain: Sonet.Accounts,
     authorizers: [Ash.Policy.Authorizer],
-    extensions: [AshAuthentication],
+    extensions: [
+      AshAuthentication,
+      AshJsonApi.Resource
+    ],
     data_layer: AshPostgres.DataLayer,
     fragments: [
       Sonet.Accounts.User.Actions
     ]
+
+  json_api do
+    type "user"
+  end
 
   authentication do
     tokens do
