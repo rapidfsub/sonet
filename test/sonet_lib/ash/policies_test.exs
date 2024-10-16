@@ -70,4 +70,31 @@ defmodule SonetLib.Ash.PoliciesTest do
            |> Ash.Changeset.for_create(:create)
            |> Ash.create!()
   end
+
+  test "not every check in a policy must pass" do
+    defmodule Article3 do
+      use Ash.Resource,
+        domain: SonetLib.Domain,
+        authorizers: [Ash.Policy.Authorizer]
+
+      attributes do
+        uuid_primary_key :id
+      end
+
+      actions do
+        defaults [:read, :destroy, create: :*, update: :*]
+      end
+
+      policies do
+        policy always() do
+          authorize_if always()
+          authorize_if never()
+        end
+      end
+    end
+
+    assert Article3
+           |> Ash.Changeset.for_create(:create)
+           |> Ash.create!()
+  end
 end
