@@ -70,5 +70,13 @@ defmodule Sonet.Accounts.User.Read do
 
       filter expr(email == ^arg(:email))
     end
+
+    read :get_current_user do
+      get? true
+
+      manual fn _query, _, %{actor: %{} = actor} ->
+        {:ok, [actor]}
+      end
+    end
   end
 end
