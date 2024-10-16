@@ -17,7 +17,7 @@ defmodule SonetWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import SonetWeb.Gettext
+  use Gettext, backend: SonetWeb.Gettext
 
   @doc """
   Renders a modal.
