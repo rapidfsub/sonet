@@ -51,7 +51,13 @@ defmodule Sonet.Accounts.User do
     end
 
     policy always() do
-      forbid_if always()
+      access_type :strict
+      authorize_if action(:get_current_user)
+    end
+
+    policy action(:get_current_user) do
+      access_type :strict
+      authorize_if actor_present()
     end
   end
 

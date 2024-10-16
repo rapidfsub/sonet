@@ -1,25 +1,36 @@
 defmodule SonetWeb.AshJsonApi.AccountsTest do
   use SonetWeb.ConnCase
 
-  test "POST /api/json/user", %{conn: conn} do
-    email = Faker.Internet.email()
-    password = Faker.Lorem.sentence()
+  describe "without user" do
+    test "POST /api/json/user", %{conn: conn} do
+      email = Faker.Internet.email()
+      password = Faker.Lorem.sentence()
 
-    conn =
-      conn
-      |> put_req_header("content-type", "application/vnd.api+json")
-      |> post(~p"/api/json/user", %{
-        data: %{
-          attributes: %{
-            email: email,
-            password: password,
-            password_confirmation: password
+      conn =
+        conn
+        |> put_req_header("content-type", "application/vnd.api+json")
+        |> post(~p"/api/json/user", %{
+          data: %{
+            attributes: %{
+              email: email,
+              password: password,
+              password_confirmation: password
+            }
           }
-        }
-      })
+        })
 
-    assert %{"data" => %{"attributes" => attributes}} = json_response(conn, 201)
-    assert attributes["email"] == email
+      assert %{"data" => %{"attributes" => attributes}} = json_response(conn, 201)
+      assert attributes["email"] == email
+    end
+
+    test "fail GET /api/json/user", %{conn: conn} do
+      conn =
+        conn
+        |> put_req_header("content-type", "application/vnd.api+json")
+        |> get(~p"/api/json/user")
+
+      assert json_response(conn, 403)
+    end
   end
 
   describe "with user" do
