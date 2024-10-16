@@ -44,7 +44,6 @@ defmodule Sonet.Accounts.User do
     bypass do
       authorize_if action(:register_with_password)
       authorize_if action(:sign_in_with_password)
-      authorize_if action(:get_current_user)
     end
 
     bypass AshAuthentication.Checks.AshAuthenticationInteraction do
@@ -53,7 +52,12 @@ defmodule Sonet.Accounts.User do
 
     policy always() do
       access_type :strict
-      forbid_if always()
+      authorize_if action(:get_current_user)
+    end
+
+    policy action(:get_current_user) do
+      access_type :strict
+      authorize_if actor_present()
     end
   end
 
