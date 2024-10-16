@@ -45,6 +45,8 @@ defmodule Sonet.MixProject do
       {:igniter, ">= 0.0.0"},
       {:open_api_spex, ">= 0.0.0"},
       {:picosat_elixir, ">= 0.0.0"},
+      # dev deps
+      {:assert_value, ">= 0.0.0", only: [:dev, :test]},
       # phoenix deps
       {:phoenix, ">= 0.0.0"},
       {:phoenix_ecto, ">= 0.0.0"},

@@ -28,6 +28,9 @@ defmodule SonetWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import SonetWeb.ConnCase
+
+      # added
+      import AssertValue
     end
   end
 

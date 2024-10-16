@@ -1,5 +1,6 @@
 [
   import_deps: [
+    :assert_value,
     :ash_json_api,
     :ash_authentication_phoenix,
     :ash_authentication,
