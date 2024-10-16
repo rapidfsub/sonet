@@ -3,8 +3,28 @@ defmodule SonetLib.AshTest do
 
   describe "changes" do
     test "local changes precede global changes" do
-      assert_value SonetLib.Forum.Article
-                   |> Ash.Changeset.for_create(:test)
+      defmodule Article do
+        use Ash.Resource,
+          domain: SonetLib.Domain
+
+        attributes do
+          uuid_primary_key :id
+          attribute :title, :string, allow_nil?: false
+        end
+
+        changes do
+          change set_attribute(:title, "Global")
+        end
+
+        actions do
+          create :create do
+            change set_attribute(:title, "Local")
+          end
+        end
+      end
+
+      assert_value Article
+                   |> Ash.Changeset.for_create(:create)
                    |> Ash.create!()
                    |> Map.take([:title]) == %{title: "Global"}
     end

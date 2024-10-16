@@ -13,5 +13,5 @@ config :sonet, Sonet.Repo,
 config :sonet,
   ash_domains: [
     Sonet.Accounts,
-    SonetLib.Forum
+    SonetLib.Domain
   ]
