@@ -74,8 +74,8 @@ defmodule Sonet.Accounts.User.Read do
     read :get_current_user do
       get? true
 
-      manual fn _query, _, %{actor: %{} = actor} ->
-        {:ok, [actor]}
+      manual fn _query, _, ctx ->
+        {:ok, List.wrap(ctx[:actor])}
       end
     end
   end
