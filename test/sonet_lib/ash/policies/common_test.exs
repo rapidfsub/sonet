@@ -1,4 +1,4 @@
-defmodule SonetLib.Ash.PoliciesTest do
+defmodule SonetLib.Ash.Policies.CommonTest do
   use Sonet.DataCase
 
   test "policy conditions are combined with and" do
