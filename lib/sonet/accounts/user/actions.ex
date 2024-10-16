@@ -2,6 +2,8 @@ defmodule Sonet.Accounts.User.Actions do
   use Spark.Dsl.Fragment, of: Ash.Resource
 
   actions do
+    defaults [:read, :destroy, create: :*, update: :*]
+
     read :get_by_subject do
       description "Get a user by the subject claim in a JWT"
       argument :subject, :string, allow_nil?: false
