@@ -24,6 +24,9 @@ defmodule Sonet.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Sonet.DataCase
+
+      # added
+      import AssertValue
     end
   end
 
