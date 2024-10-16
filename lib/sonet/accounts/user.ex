@@ -40,11 +40,12 @@ defmodule Sonet.Accounts.User do
   end
 
   policies do
-    bypass AshAuthentication.Checks.AshAuthenticationInteraction do
-      authorize_if always()
+    bypass do
+      authorize_if action(:register_with_password)
+      authorize_if action(:sign_in_with_password)
     end
 
-    bypass action(:register_with_password) do
+    bypass AshAuthentication.Checks.AshAuthenticationInteraction do
       authorize_if always()
     end
 
