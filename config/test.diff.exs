@@ -9,3 +9,9 @@ config :ex_unit, timeout: :infinity
 config :sonet, Sonet.Repo,
   timeout: :infinity,
   ownership_timeout: :infinity
+
+config :sonet,
+  ash_domains: [
+    Sonet.Accounts,
+    SonetLib.Forum
+  ]
