@@ -1,7 +1,7 @@
 defmodule SonetWeb.Router do
-  use SonetWeb, :router
-
+  import AshAuthentication.Plug.Helpers
   use AshAuthentication.Phoenix.Router
+  use SonetWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,12 +10,15 @@ defmodule SonetWeb.Router do
     plug :put_root_layout, html: {SonetWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    # added
     plug :load_from_session
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    # added
     plug :load_from_bearer
+    plug :set_actor, :user
   end
 
   scope "/api/json" do
