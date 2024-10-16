@@ -9,7 +9,8 @@ defmodule Sonet.Accounts.User do
     ],
     data_layer: AshPostgres.DataLayer,
     fragments: [
-      Sonet.Accounts.User.Actions
+      Sonet.Accounts.User.Actions,
+      Sonet.Accounts.User.Read
     ]
 
   json_api do
