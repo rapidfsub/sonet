@@ -13,7 +13,7 @@ config :sonet, Sonet.Repo,
 config :sonet,
   ash_domains: [
     Sonet.Accounts,
-    SonetLib.Domain,
+    SonetLib.TestDomain,
     SonetLib.TestIdentity
   ]
 

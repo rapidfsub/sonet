@@ -3,7 +3,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
 
   defmodule Article do
     use Ash.Resource,
-      domain: SonetLib.Domain,
+      domain: SonetLib.TestDomain,
       authorizers: [Ash.Policy.Authorizer]
 
     attributes do

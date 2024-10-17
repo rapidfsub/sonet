@@ -4,7 +4,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
   test "cannot accept non public attribute using :*" do
     defmodule Article1 do
       use Ash.Resource,
-        domain: SonetLib.Domain
+        domain: SonetLib.TestDomain
 
       attributes do
         uuid_primary_key :id
@@ -25,7 +25,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
   test "accept non public attribute with explicit whitelist" do
     defmodule Article2 do
       use Ash.Resource,
-        domain: SonetLib.Domain
+        domain: SonetLib.TestDomain
 
       attributes do
         uuid_primary_key :id
@@ -48,7 +48,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
   test "accept public attribute using :*" do
     defmodule Article3 do
       use Ash.Resource,
-        domain: SonetLib.Domain
+        domain: SonetLib.TestDomain
 
       attributes do
         uuid_primary_key :id

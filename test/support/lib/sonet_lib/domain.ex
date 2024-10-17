@@ -1,4 +1,4 @@
-defmodule SonetLib.Domain do
+defmodule SonetLib.TestDomain do
   use Ash.Domain
 
   resources do
