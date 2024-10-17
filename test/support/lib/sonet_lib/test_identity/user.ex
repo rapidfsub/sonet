@@ -1,6 +1,8 @@
 defmodule SonetLib.TestIdentity.User do
+  use SonetLib.TestPrelude
+
   use Ash.Resource,
-    domain: SonetLib.TestIdentity,
+    domain: TestIdentity,
     data_layer: AshPostgres.DataLayer
 
   postgres do

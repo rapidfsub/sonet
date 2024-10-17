@@ -1,4 +1,6 @@
 defmodule SonetLib.Shopify.Store do
+  use SonetLib.TestPrelude
+
   use Ash.Resource,
     domain: SonetLib.Shopify,
     data_layer: AshPostgres.DataLayer
@@ -18,7 +20,7 @@ defmodule SonetLib.Shopify.Store do
   end
 
   relationships do
-    belongs_to :user, SonetLib.TestIdentity.User
+    belongs_to :user, TestIdentity.User
   end
 
   identities do

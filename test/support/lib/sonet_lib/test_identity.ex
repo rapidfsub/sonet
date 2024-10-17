@@ -1,7 +1,8 @@
 defmodule SonetLib.TestIdentity do
+  use SonetLib.TestPrelude
   use Ash.Domain
 
   resources do
-    resource SonetLib.TestIdentity.User
+    resource TestIdentity.User
   end
 end

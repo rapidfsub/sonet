@@ -27,7 +27,7 @@ defmodule SonetLib.DataCase do
 
       # added
       import AssertValue
-      use SonetLib.Prelude
+      use SonetLib.TestPrelude
     end
   end
 
