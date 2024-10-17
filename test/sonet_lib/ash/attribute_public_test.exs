@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.AttributePublicTest do
-  use Sonet.DataCase
+  use SonetLib.Case
 
   test "cannot accept non public attribute using :*" do
     defmodule Article1 do
@@ -18,7 +18,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
 
     assert {:error, %{}} =
              Article1
-             |> Ash.Changeset.for_create(:create, %{title: Faker.Lorem.sentence()})
+             |> Changeset.for_create(:create, %{title: Faker.Lorem.sentence()})
              |> Ash.create()
   end
 
@@ -41,7 +41,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
 
     assert %{title: ^title} =
              Article2
-             |> Ash.Changeset.for_create(:create, %{title: title})
+             |> Changeset.for_create(:create, %{title: title})
              |> Ash.create!()
   end
 
@@ -64,7 +64,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
 
     assert %{title: ^title} =
              Article3
-             |> Ash.Changeset.for_create(:create, %{title: title})
+             |> Changeset.for_create(:create, %{title: title})
              |> Ash.create!()
   end
 end

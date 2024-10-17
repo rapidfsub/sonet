@@ -31,6 +31,7 @@ defmodule SonetWeb.ConnCase do
 
       # added
       import AssertValue
+      use SonetWeb.Prelude
     end
   end
 

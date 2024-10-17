@@ -1,5 +1,5 @@
 defmodule SonetLib.DelegateTest do
-  use Sonet.DataCase
+  use SonetLib.Case
 
   test "define delegates" do
     assert {:docs_v1, _annotation, :elixir, "text/markdown", %{}, %{}, docs} =

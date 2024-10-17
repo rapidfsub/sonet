@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.Policies.AccessTypeTest do
-  use ExUnit.Case
+  use SonetLib.Case
 
   defmodule Article do
     use Ash.Resource,
@@ -46,21 +46,21 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
   describe "create action" do
     test "pass if authorized" do
       assert Article
-             |> Ash.Changeset.for_create(:create)
+             |> Changeset.for_create(:create)
              |> Ash.create!()
     end
 
     test "raise error if filtered" do
       assert {:error, %Ash.Error.Forbidden{}} =
                Article
-               |> Ash.Changeset.for_create(:filtered_create)
+               |> Changeset.for_create(:filtered_create)
                |> Ash.create()
     end
 
     test "raise error if forbidden" do
       assert {:error, %Ash.Error.Forbidden{}} =
                Article
-               |> Ash.Changeset.for_create(:forbidden_create)
+               |> Changeset.for_create(:forbidden_create)
                |> Ash.create()
     end
   end
