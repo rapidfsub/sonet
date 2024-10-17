@@ -4,7 +4,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
   test "cannot accept non public attribute using :*" do
     defmodule Article1 do
       use Ash.Resource,
-        domain: SonetLib.Domain
+        domain: SonetLib.TestDomain
 
       attributes do
         uuid_primary_key :id
@@ -16,16 +16,13 @@ defmodule SonetLib.Ash.AttributePublicTest do
       end
     end
 
-    assert {:error, %{}} =
-             Article1
-             |> Changeset.for_create(:create, %{title: Faker.Lorem.sentence()})
-             |> Ash.create()
+    assert {:error, %{}} = Ashex.run_create(Article1, :create, %{title: Faker.Lorem.sentence()})
   end
 
   test "accept non public attribute with explicit whitelist" do
     defmodule Article2 do
       use Ash.Resource,
-        domain: SonetLib.Domain
+        domain: SonetLib.TestDomain
 
       attributes do
         uuid_primary_key :id
@@ -38,17 +35,13 @@ defmodule SonetLib.Ash.AttributePublicTest do
     end
 
     title = Faker.Lorem.sentence()
-
-    assert %{title: ^title} =
-             Article2
-             |> Changeset.for_create(:create, %{title: title})
-             |> Ash.create!()
+    assert %{title: ^title} = Ashex.run_create!(Article2, :create, %{title: title})
   end
 
   test "accept public attribute using :*" do
     defmodule Article3 do
       use Ash.Resource,
-        domain: SonetLib.Domain
+        domain: SonetLib.TestDomain
 
       attributes do
         uuid_primary_key :id
@@ -61,10 +54,6 @@ defmodule SonetLib.Ash.AttributePublicTest do
     end
 
     title = Faker.Lorem.sentence()
-
-    assert %{title: ^title} =
-             Article3
-             |> Changeset.for_create(:create, %{title: title})
-             |> Ash.create!()
+    assert %{title: ^title} = Ashex.run_create!(Article3, :create, %{title: title})
   end
 end

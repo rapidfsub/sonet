@@ -3,7 +3,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
 
   defmodule Article do
     use Ash.Resource,
-      domain: SonetLib.Domain,
+      domain: SonetLib.TestDomain,
       authorizers: [Ash.Policy.Authorizer]
 
     attributes do
@@ -45,23 +45,17 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
 
   describe "create action" do
     test "pass if authorized" do
-      assert Article
-             |> Changeset.for_create(:create)
-             |> Ash.create!()
+      assert Ashex.run_create!(Article, :create)
     end
 
     test "raise error if filtered" do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Article
-               |> Changeset.for_create(:filtered_create)
-               |> Ash.create()
+               Ashex.run_create(Article, :filtered_create)
     end
 
     test "raise error if forbidden" do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Article
-               |> Changeset.for_create(:forbidden_create)
-               |> Ash.create()
+               Ashex.run_create(Article, :forbidden_create)
     end
   end
 
@@ -71,33 +65,22 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
         for _ <- 1..10 do
           %Article{}
         end
-        |> Ash.Seed.seed!()
+        |> Ashex.seed!()
 
       %{data: data}
     end
 
     test "pass if authorized", %{data: data} do
-      assert [_ | _] =
-               Article
-               |> Query.for_read(:read)
-               |> Ash.DataLayer.Simple.set_data(data)
-               |> Ash.read!()
+      assert [_ | _] = Ashex.set_data_and_read!(Article, :read, data)
     end
 
     test "remove unauthorized records if filtered", %{data: data} do
-      assert [] =
-               Article
-               |> Query.for_read(:filtered_read)
-               |> Ash.DataLayer.Simple.set_data(data)
-               |> Ash.read!()
+      assert [] = Ashex.set_data_and_read!(Article, :filtered_read, data)
     end
 
     test "raise error if forbidden", %{data: data} do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Article
-               |> Query.for_read(:forbidden_read)
-               |> Ash.DataLayer.Simple.set_data(data)
-               |> Ash.read()
+               Ashex.set_data_and_read(Article, :forbidden_read, data)
     end
   end
 end

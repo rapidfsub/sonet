@@ -13,8 +13,9 @@ config :sonet, Sonet.Repo,
 config :sonet,
   ash_domains: [
     Sonet.Accounts,
-    SonetLib.Domain,
-    SonetLib.Identity
+    SonetLib.Shopify,
+    SonetLib.TestDomain,
+    SonetLib.TestIdentity
   ]
 
 config :sonet,

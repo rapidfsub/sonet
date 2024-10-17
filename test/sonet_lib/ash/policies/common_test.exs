@@ -4,7 +4,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
   test "policy conditions are combined with and" do
     defmodule Article1 do
       use Ash.Resource,
-        domain: SonetLib.Domain,
+        domain: SonetLib.TestDomain,
         authorizers: [Ash.Policy.Authorizer]
 
       attributes do
@@ -23,10 +23,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
       end
     end
 
-    assert {:error, %{}} =
-             Article1
-             |> Changeset.for_create(:create)
-             |> Ash.create()
+    assert {:error, %{}} = Ashex.run_create(Article1, :create)
   end
 
   test "resource policies preced fragment policies" do
@@ -44,7 +41,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
 
     defmodule Article2 do
       use Ash.Resource,
-        domain: SonetLib.Domain,
+        domain: SonetLib.TestDomain,
         authorizers: [Ash.Policy.Authorizer],
         fragments: [
           Article2Fragment
@@ -66,15 +63,13 @@ defmodule SonetLib.Ash.Policies.CommonTest do
       end
     end
 
-    assert Article2
-           |> Changeset.for_create(:create)
-           |> Ash.create!()
+    assert Ashex.run_create!(Article2, :create)
   end
 
   test "not every check in a policy must pass" do
     defmodule Article3 do
       use Ash.Resource,
-        domain: SonetLib.Domain,
+        domain: SonetLib.TestDomain,
         authorizers: [Ash.Policy.Authorizer]
 
       attributes do
@@ -93,8 +88,6 @@ defmodule SonetLib.Ash.Policies.CommonTest do
       end
     end
 
-    assert Article3
-           |> Changeset.for_create(:create)
-           |> Ash.create!()
+    assert Ashex.run_create!(Article3, :create)
   end
 end

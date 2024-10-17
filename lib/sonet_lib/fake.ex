@@ -1,10 +1,10 @@
-defmodule SonetLib.Query do
+defmodule SonetLib.Fake do
   use SonetLib.Prelude
 
   use Delegate, [
-    {Ash.Query,
+    {Faker.Internet,
      [
-       for_read: 4
+       email: 0
      ]}
   ]
 end
