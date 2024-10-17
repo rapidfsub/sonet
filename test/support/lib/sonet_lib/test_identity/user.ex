@@ -14,6 +14,7 @@ defmodule SonetLib.TestIdentity.User do
     defaults [:read, :destroy, create: :*, update: :*]
 
     create :create_with_stores do
+      accept :*
       argument :stores, {:array, :map}
       change manage_relationship(:stores, type: :create)
     end
@@ -27,7 +28,7 @@ defmodule SonetLib.TestIdentity.User do
 
   attributes do
     uuid_primary_key :id
-    attribute :email, :ci_string, allow_nil?: false
+    attribute :email, :ci_string, allow_nil?: false, public?: true
   end
 
   relationships do
