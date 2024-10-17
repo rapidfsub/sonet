@@ -14,6 +14,7 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
 
     create table(:store, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("gen_random_uuid()"), primary_key: true
+      add :handle, :citext, null: false
 
       add :user_id,
           references(:user,
@@ -23,9 +24,13 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
             prefix: "public"
           )
     end
+
+    create unique_index(:store, [:handle], name: "store_unique_handle_index")
   end
 
   def down do
+    drop_if_exists unique_index(:store, [:handle], name: "store_unique_handle_index")
+
     drop constraint(:store, "store_user_id_fkey")
 
     drop table(:store)

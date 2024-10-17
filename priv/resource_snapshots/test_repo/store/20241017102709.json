@@ -11,6 +11,16 @@
       "type": "uuid"
     },
     {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "handle",
+      "type": "citext"
+    },
+    {
       "allow_nil?": true,
       "default": "nil",
       "generated?": false,
@@ -45,8 +55,23 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "A040571F4DEEC9676F0167834589F594CE74DCE0E4DF2DA59A81229E99AA3E70",
-  "identities": [],
+  "hash": "3E70FD57FBD609A14C1A21B231E5CDCEF055F60C2AC543E8EFB1E8ED9DC99250",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "store_unique_handle_index",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "handle"
+        }
+      ],
+      "name": "unique_handle",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
   "multitenancy": {
     "attribute": null,
     "global": null,
