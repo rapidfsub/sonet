@@ -13,5 +13,20 @@ config :sonet, Sonet.Repo,
 config :sonet,
   ash_domains: [
     Sonet.Accounts,
-    SonetLib.Domain
+    SonetLib.Domain,
+    SonetLib.Identity
   ]
+
+config :sonet,
+  ecto_repos: [
+    Sonet.Repo,
+    SonetLib.TestRepo
+  ]
+
+config :sonet, SonetLib.TestRepo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "sonet_lib_test#{System.get_env("MIX_TEST_PARTITION")}",
+  pool: Ecto.Adapters.SQL.Sandbox,
+  pool_size: System.schedulers_online() * 2
