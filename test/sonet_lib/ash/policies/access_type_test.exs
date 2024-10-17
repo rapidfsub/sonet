@@ -71,7 +71,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
         for _ <- 1..10 do
           %Article{}
         end
-        |> Ash.Seed.seed!()
+        |> Ashex.seed!()
 
       %{data: data}
     end
