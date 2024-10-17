@@ -21,7 +21,7 @@
       "type": "citext"
     },
     {
-      "allow_nil?": true,
+      "allow_nil?": false,
       "default": "nil",
       "generated?": false,
       "primary_key?": false,
@@ -55,7 +55,7 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "3E70FD57FBD609A14C1A21B231E5CDCEF055F60C2AC543E8EFB1E8ED9DC99250",
+  "hash": "EC70B8CB1ABB4D778662A3C29A8100BB748CE28E6552BBD5AE707C6E9697DEB7",
   "identities": [
     {
       "all_tenants?": false,

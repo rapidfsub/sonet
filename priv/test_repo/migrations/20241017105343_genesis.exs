@@ -22,7 +22,8 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
             name: "store_user_id_fkey",
             type: :uuid,
             prefix: "public"
-          )
+          ),
+          null: false
     end
 
     create unique_index(:store, [:handle], name: "store_unique_handle_index")
