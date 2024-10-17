@@ -7,7 +7,7 @@ defmodule SonetLib.Shopify.Store do
 
   postgres do
     table "store"
-    repo SonetLib.TestRepo
+    repo TestRepo
   end
 
   actions do

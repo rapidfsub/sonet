@@ -4,6 +4,7 @@ defmodule SonetLib.TestPrelude do
       use SonetLib.Prelude
       alias SonetLib.Shopify
       alias SonetLib.TestIdentity
+      alias SonetLib.TestRepo
     end
   end
 end

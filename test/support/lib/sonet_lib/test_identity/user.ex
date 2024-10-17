@@ -7,7 +7,7 @@ defmodule SonetLib.TestIdentity.User do
 
   postgres do
     table "user"
-    repo SonetLib.TestRepo
+    repo TestRepo
   end
 
   actions do
