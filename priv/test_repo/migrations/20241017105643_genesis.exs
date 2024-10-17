@@ -10,7 +10,10 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
   def up do
     create table(:user, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("gen_random_uuid()"), primary_key: true
+      add :email, :citext, null: false
     end
+
+    create unique_index(:user, [:email], name: "user_unique_email_index")
 
     create table(:store, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("gen_random_uuid()"), primary_key: true
@@ -35,6 +38,8 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
     drop constraint(:store, "store_user_id_fkey")
 
     drop table(:store)
+
+    drop_if_exists unique_index(:user, [:email], name: "user_unique_email_index")
 
     drop table(:user)
   end
