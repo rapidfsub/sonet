@@ -23,10 +23,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
       end
     end
 
-    assert {:error, %{}} =
-             Article1
-             |> Changeset.for_create(:create)
-             |> Ashex.create()
+    assert {:error, %{}} = Ashex.run_create(Article1, :create)
   end
 
   test "resource policies preced fragment policies" do
@@ -66,9 +63,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
       end
     end
 
-    assert Article2
-           |> Changeset.for_create(:create)
-           |> Ashex.create!()
+    assert Ashex.run_create!(Article2, :create)
   end
 
   test "not every check in a policy must pass" do
@@ -93,8 +88,6 @@ defmodule SonetLib.Ash.Policies.CommonTest do
       end
     end
 
-    assert Article3
-           |> Changeset.for_create(:create)
-           |> Ashex.create!()
+    assert Ashex.run_create!(Article3, :create)
   end
 end

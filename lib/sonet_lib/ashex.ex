@@ -16,4 +16,12 @@ defmodule SonetLib.Ashex do
        seed!: 3
      ]}
   ]
+
+  def run_create(initial, action, params \\ %{}) do
+    Changeset.for_create(initial, action, params) |> create()
+  end
+
+  def run_create!(initial, action, params \\ %{}) do
+    Changeset.for_create(initial, action, params) |> create!()
+  end
 end

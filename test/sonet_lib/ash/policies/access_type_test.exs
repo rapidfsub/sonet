@@ -45,23 +45,17 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
 
   describe "create action" do
     test "pass if authorized" do
-      assert Article
-             |> Changeset.for_create(:create)
-             |> Ashex.create!()
+      assert Ashex.run_create!(Article, :create)
     end
 
     test "raise error if filtered" do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Article
-               |> Changeset.for_create(:filtered_create)
-               |> Ashex.create()
+               Ashex.run_create(Article, :filtered_create)
     end
 
     test "raise error if forbidden" do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Article
-               |> Changeset.for_create(:forbidden_create)
-               |> Ashex.create()
+               Ashex.run_create(Article, :forbidden_create)
     end
   end
 
