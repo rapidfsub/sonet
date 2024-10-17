@@ -35,6 +35,7 @@ defmodule SonetLib.AshPhoenix.CommonTest do
         end
         |> Ashex.seed!()
 
+      user = Ash.load!(user, [:stores])
       %{user: user, stores: stores}
     end
 
@@ -52,6 +53,24 @@ defmodule SonetLib.AshPhoenix.CommonTest do
                |> Form.submit!()
 
       refute user.email == old_email
+    end
+
+    test "update_with_stores", %{user: user} do
+      form =
+        user
+        |> Ash.load!([:stores])
+        |> Form.for_update(:update_with_stores, forms: [auto?: true])
+        |> Form.to_form()
+
+      form =
+        for _ <- 1..5, reduce: form do
+          form -> Form.remove_form(form, [:stores, 0])
+        end
+
+      assert %{stores: [%{}, %{}, %{}, %{}, %{}]} =
+               form
+               |> Form.submit!()
+               |> Ash.load!([:stores])
     end
   end
 end
