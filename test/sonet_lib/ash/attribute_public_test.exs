@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.AttributePublicTest do
-  use SonetLib.Case
+  use SonetLib.DataCase
 
   test "cannot accept non public attribute using :*" do
     defmodule Article1 do

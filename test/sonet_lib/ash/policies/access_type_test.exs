@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.Policies.AccessTypeTest do
-  use SonetLib.Case
+  use SonetLib.DataCase
 
   defmodule Article do
     use Ash.Resource,

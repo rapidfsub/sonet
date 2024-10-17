@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.ChangesTest do
-  use SonetLib.Case
+  use SonetLib.DataCase
 
   test "local changes precede global changes" do
     defmodule Article do

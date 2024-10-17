@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.Policies.CommonTest do
-  use SonetLib.Case
+  use SonetLib.DataCase
 
   test "policy conditions are combined with and" do
     defmodule Article1 do
