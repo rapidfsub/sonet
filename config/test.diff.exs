@@ -14,7 +14,7 @@ config :sonet,
   ash_domains: [
     Sonet.Accounts,
     SonetLib.Domain,
-    SonetLib.Identity
+    SonetLib.TestIdentity
   ]
 
 config :sonet,
