@@ -1,5 +1,7 @@
 defmodule SonetLib.Fake do
-  use SonetLib.Delegate, [
+  use SonetLib.Prelude
+
+  use Delegate, [
     {Faker.Internet,
      [
        email: 0

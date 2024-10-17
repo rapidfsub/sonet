@@ -1,5 +1,7 @@
 defmodule SonetLib.Form do
-  use SonetLib.Delegate, [
+  use SonetLib.Prelude
+
+  use Delegate, [
     {AshPhoenix.Form,
      [
        for_create: 3,

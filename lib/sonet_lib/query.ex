@@ -1,5 +1,7 @@
 defmodule SonetLib.Query do
-  use SonetLib.Delegate, [
+  use SonetLib.Prelude
+
+  use Delegate, [
     {Ash.Query,
      [
        for_read: 4

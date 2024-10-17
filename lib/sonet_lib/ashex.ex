@@ -1,5 +1,7 @@
 defmodule SonetLib.Ashex do
-  use SonetLib.Delegate, [
+  use SonetLib.Prelude
+
+  use Delegate, [
     {Ash,
      [
        create: 3,
