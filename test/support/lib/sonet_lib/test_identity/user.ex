@@ -27,9 +27,14 @@ defmodule SonetLib.TestIdentity.User do
 
   attributes do
     uuid_primary_key :id
+    attribute :email, :ci_string, allow_nil?: false
   end
 
   relationships do
     has_many :stores, Shopify.Store
+  end
+
+  identities do
+    identity :unique_email, [:email]
   end
 end
