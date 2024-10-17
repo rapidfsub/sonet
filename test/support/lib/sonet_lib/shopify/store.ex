@@ -20,7 +20,7 @@ defmodule SonetLib.Shopify.Store do
   end
 
   relationships do
-    belongs_to :user, TestIdentity.User
+    belongs_to :user, TestIdentity.User, allow_nil?: false
   end
 
   identities do
