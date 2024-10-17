@@ -71,27 +71,16 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
     end
 
     test "pass if authorized", %{data: data} do
-      assert [_ | _] =
-               Article
-               |> Query.for_read(:read)
-               |> Ash.DataLayer.Simple.set_data(data)
-               |> Ashex.read!()
+      assert [_ | _] = Ashex.set_data_and_read!(Article, :read, data)
     end
 
     test "remove unauthorized records if filtered", %{data: data} do
-      assert [] =
-               Article
-               |> Query.for_read(:filtered_read)
-               |> Ash.DataLayer.Simple.set_data(data)
-               |> Ashex.read!()
+      assert [] = Ashex.set_data_and_read!(Article, :filtered_read, data)
     end
 
     test "raise error if forbidden", %{data: data} do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Article
-               |> Query.for_read(:forbidden_read)
-               |> Ash.DataLayer.Simple.set_data(data)
-               |> Ashex.read()
+               Ashex.set_data_and_read(Article, :forbidden_read, data)
     end
   end
 end
