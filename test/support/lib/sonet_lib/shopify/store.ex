@@ -2,7 +2,7 @@ defmodule SonetLib.Shopify.Store do
   use SonetLib.TestPrelude
 
   use Ash.Resource,
-    domain: SonetLib.Shopify,
+    domain: Shopify,
     data_layer: AshPostgres.DataLayer
 
   postgres do

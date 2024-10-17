@@ -1,7 +1,8 @@
 defmodule SonetLib.Shopify do
+  use SonetLib.TestPrelude
   use Ash.Domain
 
   resources do
-    resource SonetLib.Shopify.Store
+    resource Shopify.Store
   end
 end

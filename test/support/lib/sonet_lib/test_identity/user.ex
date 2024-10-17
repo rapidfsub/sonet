@@ -17,6 +17,12 @@ defmodule SonetLib.TestIdentity.User do
       argument :stores, {:array, :map}
       change manage_relationship(:stores, type: :create)
     end
+
+    update :update_with_stores do
+      require_atomic? false
+      argument :stores, {:array, :map}
+      change manage_relationship(:stores, type: :direct_control)
+    end
   end
 
   attributes do
@@ -24,6 +30,6 @@ defmodule SonetLib.TestIdentity.User do
   end
 
   relationships do
-    has_many :stores, SonetLib.Shopify.Store
+    has_many :stores, Shopify.Store
   end
 end
