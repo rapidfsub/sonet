@@ -5,7 +5,7 @@ defmodule SonetLib.AshPhoenix.CommonTest do
     assert TestIdentity.User
            |> Form.for_create(:create,
              params: %{
-               "email" => Faker.Internet.email()
+               "email" => Fake.email()
              }
            )
            |> Form.submit!()
@@ -16,7 +16,7 @@ defmodule SonetLib.AshPhoenix.CommonTest do
              TestIdentity.User
              |> Form.for_create(:create_with_stores,
                params: %{
-                 "email" => Faker.Internet.email(),
+                 "email" => Fake.email(),
                  "stores" => [%{"handle" => "store1"}, %{"handle" => "store2"}]
                }
              )
@@ -27,7 +27,7 @@ defmodule SonetLib.AshPhoenix.CommonTest do
 
   describe "with user" do
     setup do
-      user = Ashex.seed!(TestIdentity.User, %{email: Faker.Internet.email()})
+      user = Ashex.seed!(TestIdentity.User, %{email: Fake.email()})
 
       stores =
         for i <- 1..10 do
@@ -46,7 +46,7 @@ defmodule SonetLib.AshPhoenix.CommonTest do
                user
                |> Form.for_update(:update,
                  params: %{
-                   "email" => Faker.Internet.email()
+                   "email" => Fake.email()
                  }
                )
                |> Form.submit!()
