@@ -19,7 +19,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
     assert {:error, %{}} =
              Article1
              |> Changeset.for_create(:create, %{title: Faker.Lorem.sentence()})
-             |> Ash.create()
+             |> Ashex.create()
   end
 
   test "accept non public attribute with explicit whitelist" do
@@ -42,7 +42,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
     assert %{title: ^title} =
              Article2
              |> Changeset.for_create(:create, %{title: title})
-             |> Ash.create!()
+             |> Ashex.create!()
   end
 
   test "accept public attribute using :*" do
@@ -65,6 +65,6 @@ defmodule SonetLib.Ash.AttributePublicTest do
     assert %{title: ^title} =
              Article3
              |> Changeset.for_create(:create, %{title: title})
-             |> Ash.create!()
+             |> Ashex.create!()
   end
 end

@@ -24,7 +24,7 @@ defmodule SonetLib.Ash.ChangesTest do
 
     assert_value Article
                  |> Changeset.for_create(:create)
-                 |> Ash.create!()
+                 |> Ashex.create!()
                  |> Map.take([:title]) == %{title: "Global"}
   end
 end

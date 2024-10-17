@@ -47,21 +47,21 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
     test "pass if authorized" do
       assert Article
              |> Changeset.for_create(:create)
-             |> Ash.create!()
+             |> Ashex.create!()
     end
 
     test "raise error if filtered" do
       assert {:error, %Ash.Error.Forbidden{}} =
                Article
                |> Changeset.for_create(:filtered_create)
-               |> Ash.create()
+               |> Ashex.create()
     end
 
     test "raise error if forbidden" do
       assert {:error, %Ash.Error.Forbidden{}} =
                Article
                |> Changeset.for_create(:forbidden_create)
-               |> Ash.create()
+               |> Ashex.create()
     end
   end
 
@@ -81,7 +81,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
                Article
                |> Query.for_read(:read)
                |> Ash.DataLayer.Simple.set_data(data)
-               |> Ash.read!()
+               |> Ashex.read!()
     end
 
     test "remove unauthorized records if filtered", %{data: data} do
@@ -89,7 +89,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
                Article
                |> Query.for_read(:filtered_read)
                |> Ash.DataLayer.Simple.set_data(data)
-               |> Ash.read!()
+               |> Ashex.read!()
     end
 
     test "raise error if forbidden", %{data: data} do
@@ -97,7 +97,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
                Article
                |> Query.for_read(:forbidden_read)
                |> Ash.DataLayer.Simple.set_data(data)
-               |> Ash.read()
+               |> Ashex.read()
     end
   end
 end

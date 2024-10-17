@@ -45,7 +45,7 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
           password: password,
           password_confirmation: password
         })
-        |> Ash.create!()
+        |> Ashex.create!()
 
       %{user: user, email: email, password: password}
     end
