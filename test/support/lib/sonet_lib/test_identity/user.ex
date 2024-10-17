@@ -8,6 +8,10 @@ defmodule SonetLib.TestIdentity.User do
     repo SonetLib.TestRepo
   end
 
+  actions do
+    defaults [:read, :destroy, create: :*, update: :*]
+  end
+
   attributes do
     uuid_primary_key :id
   end
