@@ -14,9 +14,14 @@ defmodule SonetLib.Shopify.Store do
 
   attributes do
     uuid_primary_key :id
+    attribute :handle, :ci_string, allow_nil?: false, public?: true
   end
 
   relationships do
     belongs_to :user, SonetLib.TestIdentity.User
+  end
+
+  identities do
+    identity :unique_handle, [:handle]
   end
 end
