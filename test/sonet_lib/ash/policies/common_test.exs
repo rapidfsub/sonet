@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.Policies.CommonTest do
-  use Sonet.DataCase
+  use SonetLib.DataCase
 
   test "policy conditions are combined with and" do
     defmodule Article1 do
@@ -25,7 +25,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
 
     assert {:error, %{}} =
              Article1
-             |> Ash.Changeset.for_create(:create)
+             |> Changeset.for_create(:create)
              |> Ash.create()
   end
 
@@ -67,7 +67,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
     end
 
     assert Article2
-           |> Ash.Changeset.for_create(:create)
+           |> Changeset.for_create(:create)
            |> Ash.create!()
   end
 
@@ -94,7 +94,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
     end
 
     assert Article3
-           |> Ash.Changeset.for_create(:create)
+           |> Changeset.for_create(:create)
            |> Ash.create!()
   end
 end

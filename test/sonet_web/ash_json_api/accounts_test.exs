@@ -40,7 +40,7 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
 
       user =
         Sonet.Accounts.User
-        |> Ash.Changeset.for_create(:register_with_password, %{
+        |> Changeset.for_create(:register_with_password, %{
           email: email,
           password: password,
           password_confirmation: password

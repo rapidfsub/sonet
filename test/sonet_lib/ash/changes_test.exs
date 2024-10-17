@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.ChangesTest do
-  use Sonet.DataCase
+  use SonetLib.DataCase
 
   test "local changes precede global changes" do
     defmodule Article do
@@ -23,7 +23,7 @@ defmodule SonetLib.Ash.ChangesTest do
     end
 
     assert_value Article
-                 |> Ash.Changeset.for_create(:create)
+                 |> Changeset.for_create(:create)
                  |> Ash.create!()
                  |> Map.take([:title]) == %{title: "Global"}
   end

@@ -1,5 +1,5 @@
 defmodule SonetLib.Ash.Policies.AccessTypeTest do
-  use ExUnit.Case
+  use SonetLib.DataCase
 
   defmodule Article do
     use Ash.Resource,
@@ -46,21 +46,21 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
   describe "create action" do
     test "pass if authorized" do
       assert Article
-             |> Ash.Changeset.for_create(:create)
+             |> Changeset.for_create(:create)
              |> Ash.create!()
     end
 
     test "raise error if filtered" do
       assert {:error, %Ash.Error.Forbidden{}} =
                Article
-               |> Ash.Changeset.for_create(:filtered_create)
+               |> Changeset.for_create(:filtered_create)
                |> Ash.create()
     end
 
     test "raise error if forbidden" do
       assert {:error, %Ash.Error.Forbidden{}} =
                Article
-               |> Ash.Changeset.for_create(:forbidden_create)
+               |> Changeset.for_create(:forbidden_create)
                |> Ash.create()
     end
   end
@@ -79,7 +79,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
     test "pass if authorized", %{data: data} do
       assert [_ | _] =
                Article
-               |> Ash.Query.for_read(:read)
+               |> Query.for_read(:read)
                |> Ash.DataLayer.Simple.set_data(data)
                |> Ash.read!()
     end
@@ -87,7 +87,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
     test "remove unauthorized records if filtered", %{data: data} do
       assert [] =
                Article
-               |> Ash.Query.for_read(:filtered_read)
+               |> Query.for_read(:filtered_read)
                |> Ash.DataLayer.Simple.set_data(data)
                |> Ash.read!()
     end
@@ -95,7 +95,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
     test "raise error if forbidden", %{data: data} do
       assert {:error, %Ash.Error.Forbidden{}} =
                Article
-               |> Ash.Query.for_read(:forbidden_read)
+               |> Query.for_read(:forbidden_read)
                |> Ash.DataLayer.Simple.set_data(data)
                |> Ash.read()
     end
