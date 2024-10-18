@@ -67,4 +67,21 @@ defmodule SonetLib.Enumex do
   def deep_map_key(value, _fun) do
     value
   end
+
+  @doc ~S"""
+  ## Examples
+
+      iex> Enumex.to_string_key(%{b: [a: 1, b: 2, a: 3], c: [a: 1, b: 2, a: 3]})
+      %{"b" => [a: 1, b: 2, a: 3], "c" => [a: 1, b: 2, a: 3]}
+
+      iex> Enumex.to_string_key([a: 1, b: 2, c: %{a: 1, b: 2, c: 3}])
+      [a: 1, b: 2, c: %{"a" => 1, "b" => 2, "c" => 3}]
+
+      iex> Enumex.to_string_key([%{a: 1, b: 2}, %{a: 1, b: 2}])
+      [%{"a" => 1, "b" => 2}, %{"a" => 1, "b" => 2}]
+
+  """
+  def to_string_key(value) do
+    deep_map_key(value, &to_string/1)
+  end
 end
