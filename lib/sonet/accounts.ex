@@ -1,4 +1,6 @@
 defmodule Sonet.Accounts do
+  use Sonet.Prelude
+
   use Ash.Domain,
     extensions: [
       AshJsonApi.Domain
@@ -6,7 +8,7 @@ defmodule Sonet.Accounts do
 
   json_api do
     routes do
-      base_route "/user", Sonet.Accounts.User do
+      base_route "/user", Accounts.User do
         post :sign_in_with_password do
           route "/login"
 
@@ -22,7 +24,7 @@ defmodule Sonet.Accounts do
   end
 
   resources do
-    resource Sonet.Accounts.Token
-    resource Sonet.Accounts.User
+    resource Accounts.Token
+    resource Accounts.User
   end
 end

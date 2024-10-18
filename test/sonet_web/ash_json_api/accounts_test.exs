@@ -39,7 +39,7 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
       password = Fake.sentence()
 
       user =
-        Ashex.run_create!(Sonet.Accounts.User, :register_with_password,
+        Ashex.run_create!(Accounts.User, :register_with_password,
           params: %{
             email: email,
             password: password,
