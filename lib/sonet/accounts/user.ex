@@ -38,7 +38,7 @@ defmodule Sonet.Accounts.User do
   end
 
   postgres do
-    table "users"
+    table "user"
     repo Repo
   end
 
@@ -65,16 +65,11 @@ defmodule Sonet.Accounts.User do
 
   attributes do
     uuid_v7_primary_key :id
-
-    attribute :email, :ci_string do
-      allow_nil? false
-      public? true
-    end
-
-    attribute :hashed_password, :string do
-      allow_nil? false
-      sensitive? true
-    end
+    attribute :email, :ci_string, allow_nil?: false, public?: true
+    attribute :hashed_password, :string, allow_nil?: false, sensitive?: true
+    attribute :username, :string, allow_nil?: false, public?: true
+    attribute :bio, :string, public?: true
+    timestamps()
   end
 
   identities do

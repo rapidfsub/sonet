@@ -12,7 +12,7 @@ defmodule Sonet.Accounts.Token do
     ]
 
   postgres do
-    table "tokens"
+    table "token"
     repo Repo
   end
 
