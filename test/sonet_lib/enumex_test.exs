@@ -1,4 +1,4 @@
 defmodule SonetLib.EnumexTest do
-  use ExUnit.Case
-  doctest SonetLib.Enumex, import: true
+  use SonetLib.DataCase
+  doctest SonetLib.Enumex
 end
