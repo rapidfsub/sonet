@@ -62,7 +62,7 @@ defmodule SonetLib.AshPhoenix.CommonTest do
         |> Form.for_update(:update_with_stores, forms: [auto?: true])
         |> Form.to_form()
 
-      old_stores = Enum.map(user.stores, &{&1.id, &1.handle})
+      old_stores = user.stores
 
       form =
         for i <- 1..3, reduce: form do
@@ -78,7 +78,7 @@ defmodule SonetLib.AshPhoenix.CommonTest do
                |> Ashex.load!([:stores])
 
       for store <- Enum.drop(stores, -3) do
-        assert {store.id, store.handle} in old_stores
+        assert Enum.any?(old_stores, &(&1.id == store.id and &1.handle == store.handle))
       end
     end
   end
