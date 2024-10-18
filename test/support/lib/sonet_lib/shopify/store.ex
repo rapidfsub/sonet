@@ -15,7 +15,7 @@ defmodule SonetLib.Shopify.Store do
   end
 
   attributes do
-    uuid_primary_key :id
+    uuid_v7_primary_key :id
     attribute :handle, :ci_string, allow_nil?: false, public?: true
   end
 

@@ -7,7 +7,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
         domain: SonetLib.TestDomain
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false
       end
 
@@ -25,7 +25,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
         domain: SonetLib.TestDomain
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false
       end
 
@@ -44,7 +44,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
         domain: SonetLib.TestDomain
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false, public?: true
       end
 

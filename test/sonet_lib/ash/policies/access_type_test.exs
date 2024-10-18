@@ -7,7 +7,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
       authorizers: [Ash.Policy.Authorizer]
 
     attributes do
-      uuid_primary_key :id
+      uuid_v7_primary_key :id
     end
 
     actions do

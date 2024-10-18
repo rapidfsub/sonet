@@ -7,7 +7,7 @@ defmodule SonetLib.Ash.ChangesTest do
         domain: SonetLib.TestDomain
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false
       end
 
