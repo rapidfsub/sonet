@@ -4,6 +4,7 @@ defmodule SonetLib.Form do
   use Delegate, [
     {AshPhoenix.Form,
      [
+       add_form: 3,
        for_create: 3,
        for_update: 3,
        get_form: 2,

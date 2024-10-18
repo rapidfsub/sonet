@@ -62,15 +62,24 @@ defmodule SonetLib.AshPhoenix.CommonTest do
         |> Form.for_update(:update_with_stores, forms: [auto?: true])
         |> Form.to_form()
 
+      old_stores = Enum.map(user.stores, &{&1.id, &1.handle})
+
       form =
-        for _ <- 1..5, reduce: form do
-          form -> Form.remove_form(form, [:stores, 0])
+        for i <- 1..3, reduce: form do
+          form ->
+            form
+            |> Form.remove_form([:stores, 0])
+            |> Form.add_form([:stores, -1], params: %{handle: "new_store_#{i}"})
         end
 
-      assert %{stores: [%{}, %{}, %{}, %{}, %{}]} =
+      assert %{stores: stores} =
                form
                |> Form.submit!()
                |> Ashex.load!([:stores])
+
+      for store <- Enum.drop(stores, -3) do
+        assert {store.id, store.handle} in old_stores
+      end
     end
   end
 end
