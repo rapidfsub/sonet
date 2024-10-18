@@ -6,7 +6,7 @@ defmodule Sonet.Accounts.User.Actions do
 
     create :register_with_password do
       description "Register a new user with a email and password."
-      accept [:email]
+      accept [:email, :username, :bio]
 
       argument :password, :string do
         description "The proposed password for the user, in plain text."
