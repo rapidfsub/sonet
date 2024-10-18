@@ -2,7 +2,7 @@
   "attributes": [
     {
       "allow_nil?": false,
-      "default": "fragment(\"gen_random_uuid()\")",
+      "default": "fragment(\"uuid_generate_v7()\")",
       "generated?": false,
       "primary_key?": true,
       "references": null,
@@ -17,7 +17,7 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "handle",
+      "source": "email",
       "type": "citext"
     },
     {
@@ -25,29 +25,10 @@
       "default": "nil",
       "generated?": false,
       "primary_key?": false,
-      "references": {
-        "deferrable": false,
-        "destination_attribute": "id",
-        "destination_attribute_default": null,
-        "destination_attribute_generated": null,
-        "index?": false,
-        "match_type": null,
-        "match_with": null,
-        "multitenancy": {
-          "attribute": null,
-          "global": null,
-          "strategy": null
-        },
-        "name": "store_user_id_fkey",
-        "on_delete": null,
-        "on_update": null,
-        "primary_key?": true,
-        "schema": "public",
-        "table": "user"
-      },
+      "references": null,
       "size": null,
-      "source": "user_id",
-      "type": "uuid"
+      "source": "hashed_password",
+      "type": "text"
     }
   ],
   "base_filter": null,
@@ -55,19 +36,19 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "AD9757EA89F7F2840E1FBF19E76C36EF00A0BFB4BE32304E074FCAC5F7B46689",
+  "hash": "48D4B38ED6F1E368106A9DE2B867096F909EE2A0AF357EFE9E5D66305C84CAC9",
   "identities": [
     {
       "all_tenants?": false,
       "base_filter": null,
-      "index_name": "store_unique_handle_index",
+      "index_name": "users_unique_email_index",
       "keys": [
         {
           "type": "atom",
-          "value": "handle"
+          "value": "email"
         }
       ],
-      "name": "unique_handle",
+      "name": "unique_email",
       "nils_distinct?": true,
       "where": null
     }
@@ -77,7 +58,7 @@
     "global": null,
     "strategy": null
   },
-  "repo": "Elixir.SonetLib.TestRepo",
+  "repo": "Elixir.Sonet.Repo",
   "schema": null,
-  "table": "store"
+  "table": "users"
 }

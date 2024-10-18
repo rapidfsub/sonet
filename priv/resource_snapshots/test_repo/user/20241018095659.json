@@ -2,7 +2,7 @@
   "attributes": [
     {
       "allow_nil?": false,
-      "default": "fragment(\"gen_random_uuid()\")",
+      "default": "fragment(\"uuid_generate_v7()\")",
       "generated?": false,
       "primary_key?": true,
       "references": null,
@@ -19,16 +19,6 @@
       "size": null,
       "source": "email",
       "type": "citext"
-    },
-    {
-      "allow_nil?": false,
-      "default": "nil",
-      "generated?": false,
-      "primary_key?": false,
-      "references": null,
-      "size": null,
-      "source": "hashed_password",
-      "type": "text"
     }
   ],
   "base_filter": null,
@@ -36,12 +26,12 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "723A63127F6D7C9EF765D8803D52F473CD2D8D9A391027E82DFDECCA85E5D0E0",
+  "hash": "EB3C7E700C391A4AF2A4AF491778279B5E00C691B3557BA1447C201FB074F888",
   "identities": [
     {
       "all_tenants?": false,
       "base_filter": null,
-      "index_name": "users_unique_email_index",
+      "index_name": "user_unique_email_index",
       "keys": [
         {
           "type": "atom",
@@ -58,7 +48,7 @@
     "global": null,
     "strategy": null
   },
-  "repo": "Elixir.Sonet.Repo",
+  "repo": "Elixir.SonetLib.TestRepo",
   "schema": null,
-  "table": "users"
+  "table": "user"
 }

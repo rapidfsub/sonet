@@ -52,7 +52,7 @@
     },
     {
       "allow_nil?": false,
-      "default": "fragment(\"gen_random_uuid()\")",
+      "default": "fragment(\"uuid_generate_v7()\")",
       "generated?": false,
       "primary_key?": true,
       "references": null,
@@ -96,7 +96,7 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "41B923DC68DA640B5BFB2777F33570B1F7522E76C93E0D1CE992E28DE2923E58",
+  "hash": "9C4456CE1AD82AE8432D301BC068F6391E4FC828356C5A3DB4C45FE4C2F7E311",
   "identities": [],
   "multitenancy": {
     "attribute": null,
