@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Delete migrations and snapshots
+find priv/repo/migrations -type f | xargs rm
+find priv/resource_snapshots/repo -type f | xargs rm
 find priv/test_repo/migrations -type f | xargs rm
 find priv/resource_snapshots/test_repo -type f | xargs rm
 
