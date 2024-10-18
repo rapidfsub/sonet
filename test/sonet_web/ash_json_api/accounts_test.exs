@@ -4,7 +4,7 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
   describe "without user" do
     test "POST /api/json/user", %{conn: conn} do
       email = Fake.email()
-      password = Faker.Lorem.sentence()
+      password = Fake.sentence()
 
       conn =
         conn
@@ -36,7 +36,7 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
   describe "with user" do
     setup do
       email = Fake.email()
-      password = Faker.Lorem.sentence()
+      password = Fake.sentence()
 
       user =
         Ashex.run_create!(Sonet.Accounts.User, :register_with_password, %{

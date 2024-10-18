@@ -5,6 +5,10 @@ defmodule SonetLib.Fake do
     {Faker.Internet,
      [
        email: 0
+     ]},
+    {Faker.Lorem,
+     [
+       sentence: 1
      ]}
   ]
 end
