@@ -8,7 +8,8 @@ defmodule SonetLib.Fake do
      ]},
     {Faker.Lorem,
      [
-       sentence: 1
+       sentence: 1,
+       word: 0
      ]}
   ]
 end
