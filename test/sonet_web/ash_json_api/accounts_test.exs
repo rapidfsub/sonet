@@ -2,25 +2,21 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
   use SonetWeb.ConnCase
 
   describe "without user" do
-    test "POST /api/json/user", %{conn: conn} do
+    test "POST /api/json/user", ~M{conn} do
       email = Fake.email()
-      password = Faker.Lorem.sentence()
+      password = Fake.sentence()
+      username = Fake.word()
+      bio = Fake.sentence()
 
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
         |> post(~p"/api/json/user", %{
-          data: %{
-            attributes: %{
-              email: email,
-              password: password,
-              password_confirmation: password
-            }
-          }
+          data: %{attributes: ~M{email, password, password_confirmation: password, username, bio}}
         })
 
-      assert %{"data" => %{"attributes" => attributes}} = json_response(conn, 201)
-      assert attributes["email"] == email
+      assert %{"data" => ~m{attributes}} = json_response(conn, 201)
+      assert ~m{^email, ^username, ^bio} = Map.take(attributes, ["email", "username", "bio"])
     end
 
     test "fail GET /api/json/user", %{conn: conn} do
@@ -36,38 +32,34 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
   describe "with user" do
     setup do
       email = Fake.email()
-      password = Faker.Lorem.sentence()
+      password = Fake.sentence()
+      username = Fake.word()
+      bio = Fake.sentence()
 
       user =
-        Ashex.run_create!(Sonet.Accounts.User, :register_with_password, %{
-          email: email,
-          password: password,
-          password_confirmation: password
-        })
+        Ashex.run_create!(Accounts.User, :register_with_password,
+          params: ~M{email, password, password_confirmation: password, username, bio}
+        )
 
       %{user: user, email: email, password: password}
     end
 
-    test "POST /api/json/user/login", %{conn: conn, email: email, password: password} do
+    test "POST /api/json/user/login", ~M{conn, user, email, password} do
+      ~M{username, bio} = user
+
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
-        |> post(~p"/api/json/user/login", %{
-          data: %{
-            attributes: %{
-              email: email,
-              password: password
-            }
-          }
-        })
+        |> post(~p"/api/json/user/login", %{data: %{attributes: ~M{email, password}}})
 
       assert %{
-               "data" => %{"attributes" => %{"email" => ^email}},
+               "data" => %{"attributes" => ~m{^email, ^username, ^bio}},
                "meta" => %{"token" => <<_token::binary>>}
              } = json_response(conn, 201)
     end
 
-    test "GET /api/json/user", %{conn: conn, user: user, email: email} do
+    test "GET /api/json/user", ~M{conn, user, email} do
+      ~M{username, bio} = user
       token = user.__metadata__.token
 
       conn =
@@ -76,8 +68,8 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
         |> put_req_header("authorization", "Bearer #{token}")
         |> get(~p"/api/json/user")
 
-      assert %{"data" => %{"attributes" => attributes}} = json_response(conn, 200)
-      assert attributes["email"] == email
+      assert %{"data" => ~m{attributes}} = json_response(conn, 200)
+      assert ~m{^email, ^username, ^bio} = Map.take(attributes, ["email", "username", "bio"])
     end
   end
 end

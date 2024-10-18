@@ -8,7 +8,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
         authorizers: [Ash.Policy.Authorizer]
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false
       end
 
@@ -48,7 +48,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
         ]
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string
       end
 
@@ -73,7 +73,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
         authorizers: [Ash.Policy.Authorizer]
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
       end
 
       actions do

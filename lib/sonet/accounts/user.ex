@@ -1,7 +1,9 @@
 defmodule Sonet.Accounts.User do
+  use Sonet.Prelude
+
   use Ash.Resource,
     otp_app: :sonet,
-    domain: Sonet.Accounts,
+    domain: Accounts,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [
       AshAuthentication,
@@ -9,8 +11,8 @@ defmodule Sonet.Accounts.User do
     ],
     data_layer: AshPostgres.DataLayer,
     fragments: [
-      Sonet.Accounts.User.Actions,
-      Sonet.Accounts.User.Read
+      Accounts.User.Actions,
+      Accounts.User.Read
     ]
 
   json_api do
@@ -20,7 +22,7 @@ defmodule Sonet.Accounts.User do
   authentication do
     tokens do
       enabled? true
-      token_resource Sonet.Accounts.Token
+      token_resource Accounts.Token
       signing_secret Sonet.Secrets
     end
 
@@ -29,15 +31,15 @@ defmodule Sonet.Accounts.User do
         identity_field :email
 
         resettable do
-          sender Sonet.Accounts.User.Senders.SendPasswordResetEmail
+          sender Accounts.User.Senders.SendPasswordResetEmail
         end
       end
     end
   end
 
   postgres do
-    table "users"
-    repo Sonet.Repo
+    table "user"
+    repo Repo
   end
 
   policies do
@@ -62,17 +64,12 @@ defmodule Sonet.Accounts.User do
   end
 
   attributes do
-    uuid_primary_key :id
-
-    attribute :email, :ci_string do
-      allow_nil? false
-      public? true
-    end
-
-    attribute :hashed_password, :string do
-      allow_nil? false
-      sensitive? true
-    end
+    uuid_v7_primary_key :id
+    attribute :email, :ci_string, allow_nil?: false, public?: true
+    attribute :hashed_password, :string, allow_nil?: false, sensitive?: true
+    attribute :username, :string, allow_nil?: false, public?: true
+    attribute :bio, :string, public?: true
+    timestamps()
   end
 
   identities do

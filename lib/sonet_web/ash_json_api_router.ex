@@ -1,7 +1,9 @@
 defmodule SonetWeb.AshJsonApiRouter do
+  use SonetWeb.Prelude
+
   use AshJsonApi.Router,
     domains: [
-      Sonet.Accounts
+      Accounts
     ],
     open_api: "/open_api",
     modify_open_api: {__MODULE__, :modify_open_api, []}

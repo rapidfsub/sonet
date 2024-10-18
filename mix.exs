@@ -35,6 +35,7 @@ defmodule Sonet.MixProject do
     [
       {:bcrypt_elixir, ">= 0.0.0"},
       {:faker, ">= 0.0.0"},
+      {:tiny_maps, ">= 0.0.0"},
       # ash deps
       {:ash, ">= 0.0.0"},
       {:ash_authentication, ">= 0.0.0"},

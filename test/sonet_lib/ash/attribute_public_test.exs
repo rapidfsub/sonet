@@ -7,7 +7,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
         domain: SonetLib.TestDomain
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false
       end
 
@@ -16,7 +16,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
       end
     end
 
-    assert {:error, %{}} = Ashex.run_create(Article1, :create, %{title: Faker.Lorem.sentence()})
+    assert {:error, %{}} = Ashex.run_create(Article1, :create, params: %{title: Fake.sentence()})
   end
 
   test "accept non public attribute with explicit whitelist" do
@@ -25,7 +25,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
         domain: SonetLib.TestDomain
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false
       end
 
@@ -34,8 +34,8 @@ defmodule SonetLib.Ash.AttributePublicTest do
       end
     end
 
-    title = Faker.Lorem.sentence()
-    assert %{title: ^title} = Ashex.run_create!(Article2, :create, %{title: title})
+    title = Fake.sentence()
+    assert %{title: ^title} = Ashex.run_create!(Article2, :create, params: %{title: title})
   end
 
   test "accept public attribute using :*" do
@@ -44,7 +44,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
         domain: SonetLib.TestDomain
 
       attributes do
-        uuid_primary_key :id
+        uuid_v7_primary_key :id
         attribute :title, :string, allow_nil?: false, public?: true
       end
 
@@ -53,7 +53,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
       end
     end
 
-    title = Faker.Lorem.sentence()
-    assert %{title: ^title} = Ashex.run_create!(Article3, :create, %{title: title})
+    title = Fake.sentence()
+    assert %{title: ^title} = Ashex.run_create!(Article3, :create, params: %{title: title})
   end
 end

@@ -1,17 +1,19 @@
 defmodule Sonet.Accounts.Token do
+  use Sonet.Prelude
+
   use Ash.Resource,
     otp_app: :sonet,
-    domain: Sonet.Accounts,
+    domain: Accounts,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshAuthentication.TokenResource],
     data_layer: AshPostgres.DataLayer,
     fragments: [
-      Sonet.Accounts.Token.Actions
+      Accounts.Token.Actions
     ]
 
   postgres do
-    table "tokens"
-    repo Sonet.Repo
+    table "token"
+    repo Repo
   end
 
   policies do
@@ -27,7 +29,7 @@ defmodule Sonet.Accounts.Token do
   end
 
   attributes do
-    uuid_primary_key :id
+    uuid_v7_primary_key :id
 
     attribute :jti, :string do
       primary_key? true

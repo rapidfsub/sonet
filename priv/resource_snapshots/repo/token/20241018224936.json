@@ -52,7 +52,7 @@
     },
     {
       "allow_nil?": false,
-      "default": "fragment(\"gen_random_uuid()\")",
+      "default": "fragment(\"uuid_generate_v7()\")",
       "generated?": false,
       "primary_key?": true,
       "references": null,
@@ -96,7 +96,7 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "41B923DC68DA640B5BFB2777F33570B1F7522E76C93E0D1CE992E28DE2923E58",
+  "hash": "AE2A6F8B8C1F474CA738C5F3B76F006B84A26626ACFBB61208B8F1C1AAF264B0",
   "identities": [],
   "multitenancy": {
     "attribute": null,
@@ -105,5 +105,5 @@
   },
   "repo": "Elixir.Sonet.Repo",
   "schema": null,
-  "table": "tokens"
+  "table": "token"
 }
