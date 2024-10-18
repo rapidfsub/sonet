@@ -21,25 +21,30 @@ defmodule SonetLib.Ashex do
      ]}
   ]
 
-  def run_create(initial, action, params \\ %{}) do
-    Changeset.for_create(initial, action, params) |> create()
+  def run_create(initial, action, opts1 \\ [], opts2 \\ []) do
+    {params, opts} = pop_params(opts1, opts2)
+    Changeset.for_create(initial, action, params, opts) |> create()
   end
 
-  def run_create!(initial, action, params \\ %{}) do
-    Changeset.for_create(initial, action, params) |> create!()
+  def run_create!(initial, action, opts1 \\ [], opts2 \\ []) do
+    {params, opts} = pop_params(opts1, opts2)
+    Changeset.for_create(initial, action, params, opts) |> create!()
   end
 
-  def set_data_and_read(query, action_name, data, args \\ %{}, opts \\ []) do
-    query
-    |> Query.for_read(action_name, args, opts)
-    |> Ash.DataLayer.Simple.set_data(data)
-    |> read()
+  defp pop_params(opts1, opts2) do
+    Keyword.merge(opts1, opts2) |> Keyword.pop(:params, %{})
   end
 
-  def set_data_and_read!(query, action_name, data, args \\ %{}, opts \\ []) do
-    query
-    |> Query.for_read(action_name, args, opts)
-    |> Ash.DataLayer.Simple.set_data(data)
-    |> read!()
+  def set_data_and_read(query, action_name, data, opts1 \\ [], opts2 \\ []) do
+    do_set_data_and_read(query, action_name, data, opts1, opts2) |> read()
+  end
+
+  def set_data_and_read!(query, action_name, data, opts1 \\ [], opts2 \\ []) do
+    do_set_data_and_read(query, action_name, data, opts1, opts2) |> read!()
+  end
+
+  defp do_set_data_and_read(query, action_name, data, opts1, opts2) do
+    {params, opts} = pop_params(opts1, opts2)
+    Query.for_read(query, action_name, params, opts) |> Ash.DataLayer.Simple.set_data(data)
   end
 end
