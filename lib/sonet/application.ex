@@ -1,4 +1,6 @@
 defmodule Sonet.Application do
+  use Sonet.Prelude
+
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,7 +11,7 @@ defmodule Sonet.Application do
   def start(_type, _args) do
     children = [
       SonetWeb.Telemetry,
-      Sonet.Repo,
+      Repo,
       {DNSCluster, query: Application.get_env(:sonet, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Sonet.PubSub},
       # Start the Finch HTTP client for sending emails

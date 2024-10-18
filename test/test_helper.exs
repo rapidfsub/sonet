@@ -1,5 +1,7 @@
+use Sonet.Prelude
+
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(Sonet.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(Repo, :manual)
 
 # added
 use SonetLib.TestPrelude

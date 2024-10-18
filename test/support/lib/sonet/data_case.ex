@@ -15,10 +15,11 @@ defmodule Sonet.DataCase do
   """
 
   use ExUnit.CaseTemplate
+  use Sonet.Prelude
 
   using do
     quote do
-      alias Sonet.Repo
+      # alias Sonet.Repo
 
       import Ecto
       import Ecto.Changeset
@@ -27,6 +28,7 @@ defmodule Sonet.DataCase do
 
       # added
       import AssertValue
+      use Sonet.Prelude
     end
   end
 
@@ -39,7 +41,7 @@ defmodule Sonet.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Sonet.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 

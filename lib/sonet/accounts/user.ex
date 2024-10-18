@@ -39,7 +39,7 @@ defmodule Sonet.Accounts.User do
 
   postgres do
     table "users"
-    repo Sonet.Repo
+    repo Repo
   end
 
   policies do

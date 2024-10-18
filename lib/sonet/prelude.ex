@@ -3,6 +3,7 @@ defmodule Sonet.Prelude do
     quote do
       use SonetLib.Prelude
       alias Sonet.Accounts
+      alias Sonet.Repo
     end
   end
 end
