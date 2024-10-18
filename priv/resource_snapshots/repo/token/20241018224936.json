@@ -96,7 +96,7 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "9C4456CE1AD82AE8432D301BC068F6391E4FC828356C5A3DB4C45FE4C2F7E311",
+  "hash": "AE2A6F8B8C1F474CA738C5F3B76F006B84A26626ACFBB61208B8F1C1AAF264B0",
   "identities": [],
   "multitenancy": {
     "attribute": null,
@@ -105,5 +105,5 @@
   },
   "repo": "Elixir.Sonet.Repo",
   "schema": null,
-  "table": "tokens"
+  "table": "token"
 }

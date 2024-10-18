@@ -29,6 +29,46 @@
       "size": null,
       "source": "hashed_password",
       "type": "text"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "username",
+      "type": "text"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "bio",
+      "type": "text"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"(now() AT TIME ZONE 'utc')\")",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "inserted_at",
+      "type": "utc_datetime_usec"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"(now() AT TIME ZONE 'utc')\")",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "updated_at",
+      "type": "utc_datetime_usec"
     }
   ],
   "base_filter": null,
@@ -36,12 +76,12 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "48D4B38ED6F1E368106A9DE2B867096F909EE2A0AF357EFE9E5D66305C84CAC9",
+  "hash": "38ED52737FC264F4E3115B178FE84BB23CFAB71D7DE3916F219DE6CBBBCE67AC",
   "identities": [
     {
       "all_tenants?": false,
       "base_filter": null,
-      "index_name": "users_unique_email_index",
+      "index_name": "user_unique_email_index",
       "keys": [
         {
           "type": "atom",
@@ -60,5 +100,5 @@
   },
   "repo": "Elixir.Sonet.Repo",
   "schema": null,
-  "table": "users"
+  "table": "user"
 }
