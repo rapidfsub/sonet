@@ -4,6 +4,7 @@ defmodule SonetLib.Prelude do
       alias SonetLib.Ashex
       alias SonetLib.Changeset
       alias SonetLib.Delegate
+      alias SonetLib.Enumex
       alias SonetLib.Fake
       alias SonetLib.Form
       alias SonetLib.Query
