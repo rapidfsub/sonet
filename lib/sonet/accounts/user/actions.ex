@@ -78,5 +78,9 @@ defmodule Sonet.Accounts.User.Actions do
       # Generates an authentication token for the user
       change AshAuthentication.GenerateTokenChange
     end
+
+    update :update_current_user do
+      accept [:username, :bio]
+    end
   end
 end

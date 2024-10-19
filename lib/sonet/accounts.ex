@@ -19,6 +19,7 @@ defmodule Sonet.Accounts do
 
         post :register_with_password
         get :get_current_user, route: "/"
+        patch :update_current_user, route: "/", read_action: :get_current_user
       end
     end
   end
