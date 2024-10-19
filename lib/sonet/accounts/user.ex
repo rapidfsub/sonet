@@ -80,5 +80,6 @@ defmodule Sonet.Accounts.User do
 
   identities do
     identity :unique_email, [:email]
+    identity :unique_username, [:username]
   end
 end
