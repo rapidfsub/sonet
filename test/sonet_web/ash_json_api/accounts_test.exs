@@ -90,5 +90,16 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
       assert %{"data" => ~m{^id, attributes}} = json_response(conn, 200)
       assert ~m{^username, ^bio} = attributes
     end
+
+    test "GET /api/json/user/:username", ~M{conn, user} do
+      conn =
+        conn
+        |> put_req_header("content-type", "application/vnd.api+json")
+        |> get(~p"/api/json/user/#{user.username}")
+
+      id = user.id
+      assert %{"data" => ~m{^id, attributes}} = json_response(conn, 200)
+      assert attributes["username"] == user.username
+    end
   end
 end
