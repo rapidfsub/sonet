@@ -8,6 +8,8 @@ defmodule SonetLib.Ashex do
        create!: 3,
        read: 2,
        read!: 2,
+       update: 3,
+       update!: 3,
        load!: 3
      ]},
     {Ash.DataLayer.Simple,

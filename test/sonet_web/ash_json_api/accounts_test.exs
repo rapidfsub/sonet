@@ -16,7 +16,7 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
         })
 
       assert %{"data" => ~m{attributes}} = json_response(conn, 201)
-      assert ~m{^email, ^username, ^bio} = Map.take(attributes, ["email", "username", "bio"])
+      assert ~m{^email, ^username, ^bio} = attributes
     end
 
     test "fail GET /api/json/user", %{conn: conn} do
@@ -69,7 +69,26 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
         |> get(~p"/api/json/user")
 
       assert %{"data" => ~m{attributes}} = json_response(conn, 200)
-      assert ~m{^email, ^username, ^bio} = Map.take(attributes, ["email", "username", "bio"])
+      assert ~m{^email, ^username, ^bio} = attributes
+    end
+
+    test "PATCH /api/json/user", ~M{conn, user} do
+      username = Fake.word()
+      bio = Fake.sentence()
+      assert username != user.username
+      assert bio != user.bio
+
+      token = user.__metadata__.token
+
+      conn =
+        conn
+        |> put_req_header("content-type", "application/vnd.api+json")
+        |> put_req_header("authorization", "Bearer #{token}")
+        |> patch(~p"/api/json/user", %{data: %{attributes: ~M{username, bio}}})
+
+      id = user.id
+      assert %{"data" => ~m{^id, attributes}} = json_response(conn, 200)
+      assert ~m{^username, ^bio} = attributes
     end
   end
 end
