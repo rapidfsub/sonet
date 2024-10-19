@@ -46,6 +46,7 @@ defmodule Sonet.Accounts.User do
     bypass do
       authorize_if action(:register_with_password)
       authorize_if action(:sign_in_with_password)
+      authorize_if action(:read)
     end
 
     bypass AshAuthentication.Checks.AshAuthenticationInteraction do
@@ -80,5 +81,6 @@ defmodule Sonet.Accounts.User do
 
   identities do
     identity :unique_email, [:email]
+    identity :unique_username, [:username]
   end
 end

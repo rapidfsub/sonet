@@ -99,7 +99,7 @@ defmodule Sonet.MixProject do
         "esbuild sonet --minify",
         "phx.digest"
       ],
-      "ash.setup": ["ash.setup", "run priv/repo/seeds.exs"]
+      "ash.setup": ["ecto.force_drop", "ash.setup", "run priv/repo/seeds.exs"]
     ]
   end
 end
