@@ -103,8 +103,8 @@
   "check_constraints": [],
   "custom_indexes": [],
   "custom_statements": [],
-  "has_create_action": false,
-  "hash": "D4A21DA6946BA005BCED9460C1231493AD511419AC7FA3363E00B1EB28159623",
+  "has_create_action": true,
+  "hash": "110ADC0333CF89E4A5999527FDE42C5C5BB972B0FBC0DA26915E114D500D0B93",
   "identities": [
     {
       "all_tenants?": false,
