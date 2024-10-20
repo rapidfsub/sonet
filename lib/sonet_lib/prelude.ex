@@ -9,6 +9,8 @@ defmodule SonetLib.Prelude do
       alias SonetLib.Form
       alias SonetLib.Observer
       alias SonetLib.Query
+
+      import TinyMaps
     end
   end
 end
