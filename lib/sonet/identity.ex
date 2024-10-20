@@ -10,7 +10,6 @@ defmodule Sonet.Identity do
     routes do
       base_route "/account", Identity.Account do
         get :get_current_account, route: "/"
-        get :read, route: "/:username"
         post :register_with_password
 
         post :sign_in_with_password do
@@ -22,6 +21,16 @@ defmodule Sonet.Identity do
         end
 
         patch :update_current_account, route: "/", read_action: :get_current_account
+      end
+
+      @default_fields [:username, :bio, :is_following]
+      base_route "/profile", Identity.Account do
+        get :read, route: "/:username"
+
+        patch :follow do
+          route "/:username/follow"
+          default_fields @default_fields
+        end
       end
     end
   end
