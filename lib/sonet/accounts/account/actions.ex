@@ -79,7 +79,7 @@ defmodule Sonet.Identity.Account.Actions do
       change AshAuthentication.GenerateTokenChange
     end
 
-    update :update_current_user do
+    update :update_current_account do
       accept [:username, :bio]
     end
   end

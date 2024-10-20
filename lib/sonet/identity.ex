@@ -9,6 +9,10 @@ defmodule Sonet.Identity do
   json_api do
     routes do
       base_route "/user", Identity.Account do
+        get :get_current_account, route: "/"
+        get :read, route: "/:username", name: "/user/:username"
+        post :register_with_password
+
         post :sign_in_with_password do
           route "/login"
 
@@ -17,10 +21,7 @@ defmodule Sonet.Identity do
           end
         end
 
-        post :register_with_password
-        get :get_current_user, route: "/"
-        patch :update_current_user, route: "/", read_action: :get_current_user
-        get :read, name: "/user/:username", route: "/:username"
+        patch :update_current_account, route: "/", read_action: :get_current_account
       end
     end
   end

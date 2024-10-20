@@ -55,16 +55,16 @@ defmodule Sonet.Identity.Account do
 
     policy always() do
       access_type :strict
-      authorize_if action(:get_current_user)
-      authorize_if action(:update_current_user)
+      authorize_if action(:get_current_account)
+      authorize_if action(:update_current_account)
     end
 
-    policy action(:get_current_user) do
+    policy action(:get_current_account) do
       access_type :strict
       authorize_if actor_present()
     end
 
-    policy action(:update_current_user) do
+    policy action(:update_current_account) do
       access_type :strict
       authorize_if actor_present()
     end
