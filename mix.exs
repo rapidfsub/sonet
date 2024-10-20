@@ -91,7 +91,12 @@ defmodule Sonet.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.force_drop", "ecto.setup"],
       "ecto.force_drop": ["ecto.drop --force-drop"],
-      test: ["ash.setup --quiet", "test"],
+      test: [
+        "ecto.force_drop",
+        # ↑ added
+        "ash.setup --quiet",
+        "test"
+      ],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind sonet", "esbuild sonet"],
       "assets.deploy": [
@@ -99,7 +104,7 @@ defmodule Sonet.MixProject do
         "esbuild sonet --minify",
         "phx.digest"
       ],
-      "ash.setup": ["ecto.force_drop", "ash.setup", "run priv/repo/seeds.exs"]
+      "ash.setup": ["ash.setup", "run priv/repo/seeds.exs"]
     ]
   end
 end
