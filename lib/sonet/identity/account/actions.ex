@@ -1,4 +1,5 @@
 defmodule Sonet.Identity.Account.Actions do
+  use Sonet.Prelude
   use Spark.Dsl.Fragment, of: Ash.Resource
 
   actions do
@@ -81,6 +82,20 @@ defmodule Sonet.Identity.Account.Actions do
 
     update :update_current_account do
       accept [:username, :bio]
+    end
+
+    update :follow do
+      argument :is_following, :boolean, allow_nil?: false
+      argument :follower_clip, :map, public?: false
+      require_atomic? false
+
+      change fn changeset, _ctx ->
+        is_active = Changeset.get_argument(changeset, :is_following)
+        Changeset.set_argument(changeset, :follower_clip, %{is_active: is_active})
+      end
+
+      change manage_relationship(:follower_clip, :follower_clips, type: :create)
+      change load([:is_following])
     end
   end
 end

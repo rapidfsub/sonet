@@ -36,6 +36,16 @@ defmodule SonetLib.Ashex do
     Changeset.for_create(initial, action, params, opts) |> create!()
   end
 
+  def run_update(initial, action, opts1 \\ [], opts2 \\ []) do
+    {params, opts} = pop_params(opts1, opts2)
+    Changeset.for_update(initial, action, params, opts) |> update()
+  end
+
+  def run_update!(initial, action, opts1 \\ [], opts2 \\ []) do
+    {params, opts} = pop_params(opts1, opts2)
+    Changeset.for_update(initial, action, params, opts) |> update!()
+  end
+
   defp pop_params(opts1, opts2) do
     Keyword.merge(opts1, opts2) |> Keyword.pop(:params, %{})
   end
