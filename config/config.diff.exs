@@ -35,7 +35,7 @@ config :spark,
     ]
   ]
 
-config :sonet, ash_domains: [Sonet.Accounts]
+config :sonet, ash_domains: [Sonet.Identity]
 
 config :mime,
   extensions: %{"json" => "application/vnd.api+json"},

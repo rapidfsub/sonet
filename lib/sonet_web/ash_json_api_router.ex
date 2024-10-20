@@ -3,7 +3,7 @@ defmodule SonetWeb.AshJsonApiRouter do
 
   use AshJsonApi.Router,
     domains: [
-      Accounts
+      Identity
     ],
     open_api: "/open_api",
     modify_open_api: {__MODULE__, :modify_open_api, []}

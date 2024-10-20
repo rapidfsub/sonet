@@ -1,4 +1,4 @@
-defmodule Sonet.Accounts.User.Senders.SendPasswordResetEmail do
+defmodule Sonet.Identity.Account.Senders.SendPasswordResetEmail do
   @moduledoc """
   Sends a password reset email
   """
@@ -9,7 +9,7 @@ defmodule Sonet.Accounts.User.Senders.SendPasswordResetEmail do
   @impl true
   def send(_user, token, _) do
     # Example of how you might send this email
-    # Sonet.Accounts.Emails.send_password_reset_email(
+    # Sonet.Identity.Emails.send_password_reset_email(
     #   user,
     #   token
     # )

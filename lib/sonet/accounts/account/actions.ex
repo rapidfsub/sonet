@@ -1,4 +1,4 @@
-defmodule Sonet.Accounts.User.Actions do
+defmodule Sonet.Identity.Account.Actions do
   use Spark.Dsl.Fragment, of: Ash.Resource
 
   actions do
@@ -79,7 +79,7 @@ defmodule Sonet.Accounts.User.Actions do
       change AshAuthentication.GenerateTokenChange
     end
 
-    update :update_current_user do
+    update :update_current_account do
       accept [:username, :bio]
     end
   end

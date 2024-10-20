@@ -1,4 +1,4 @@
-defmodule Sonet.Accounts.User.Read do
+defmodule Sonet.Identity.Account.Read do
   use Spark.Dsl.Fragment, of: Ash.Resource
 
   actions do
@@ -71,7 +71,7 @@ defmodule Sonet.Accounts.User.Read do
       filter expr(email == ^arg(:email))
     end
 
-    read :get_current_user do
+    read :get_current_account do
       get? true
 
       manual fn _query, _, ctx ->

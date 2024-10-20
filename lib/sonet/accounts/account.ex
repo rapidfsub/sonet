@@ -1,9 +1,9 @@
-defmodule Sonet.Accounts.User do
+defmodule Sonet.Identity.Account do
   use Sonet.Prelude
 
   use Ash.Resource,
     otp_app: :sonet,
-    domain: Accounts,
+    domain: Identity,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [
       AshAuthentication,
@@ -11,18 +11,18 @@ defmodule Sonet.Accounts.User do
     ],
     data_layer: AshPostgres.DataLayer,
     fragments: [
-      Accounts.User.Actions,
-      Accounts.User.Read
+      Identity.Account.Actions,
+      Identity.Account.Read
     ]
 
   json_api do
-    type "user"
+    type "account"
   end
 
   authentication do
     tokens do
       enabled? true
-      token_resource Accounts.Token
+      token_resource Identity.Token
       signing_secret Sonet.Secrets
     end
 
@@ -31,14 +31,14 @@ defmodule Sonet.Accounts.User do
         identity_field :email
 
         resettable do
-          sender Accounts.User.Senders.SendPasswordResetEmail
+          sender Identity.Account.Senders.SendPasswordResetEmail
         end
       end
     end
   end
 
   postgres do
-    table "user"
+    table "account"
     repo Repo
   end
 
@@ -55,16 +55,16 @@ defmodule Sonet.Accounts.User do
 
     policy always() do
       access_type :strict
-      authorize_if action(:get_current_user)
-      authorize_if action(:update_current_user)
+      authorize_if action(:get_current_account)
+      authorize_if action(:update_current_account)
     end
 
-    policy action(:get_current_user) do
+    policy action(:get_current_account) do
       access_type :strict
       authorize_if actor_present()
     end
 
-    policy action(:update_current_user) do
+    policy action(:update_current_account) do
       access_type :strict
       authorize_if actor_present()
     end

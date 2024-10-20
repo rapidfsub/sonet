@@ -19,7 +19,7 @@ defmodule SonetWeb.Router do
     plug :accepts, ["json"]
     # added
     plug :load_from_bearer
-    plug :set_actor, :user
+    plug :set_actor, :account
   end
 
   scope "/api/json" do
@@ -52,7 +52,7 @@ defmodule SonetWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    auth_routes AuthController, Accounts.User, path: "/auth"
+    auth_routes AuthController, Identity.Account, path: "/auth"
     sign_out_route AuthController
 
     # Remove these if you'd like to use your own authentication views
