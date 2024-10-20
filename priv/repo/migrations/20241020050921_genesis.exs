@@ -26,6 +26,8 @@ defmodule Sonet.Repo.Migrations.Genesis do
 
     create unique_index(:user, [:email], name: "user_unique_email_index")
 
+    create unique_index(:user, [:username], name: "user_unique_username_index")
+
     create table(:token, primary_key: false) do
       add :created_at, :utc_datetime_usec,
         null: false,
@@ -50,6 +52,8 @@ defmodule Sonet.Repo.Migrations.Genesis do
 
   def down do
     drop table(:token)
+
+    drop_if_exists unique_index(:user, [:username], name: "user_unique_username_index")
 
     drop_if_exists unique_index(:user, [:email], name: "user_unique_email_index")
 
