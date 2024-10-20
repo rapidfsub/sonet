@@ -1,4 +1,4 @@
-defmodule Sonet.Identity.User do
+defmodule Sonet.Identity.Account do
   use Sonet.Prelude
 
   use Ash.Resource,
@@ -11,12 +11,12 @@ defmodule Sonet.Identity.User do
     ],
     data_layer: AshPostgres.DataLayer,
     fragments: [
-      Identity.User.Actions,
-      Identity.User.Read
+      Identity.Account.Actions,
+      Identity.Account.Read
     ]
 
   json_api do
-    type "user"
+    type "account"
   end
 
   authentication do
@@ -31,14 +31,14 @@ defmodule Sonet.Identity.User do
         identity_field :email
 
         resettable do
-          sender Identity.User.Senders.SendPasswordResetEmail
+          sender Identity.Account.Senders.SendPasswordResetEmail
         end
       end
     end
   end
 
   postgres do
-    table "user"
+    table "account"
     repo Repo
   end
 

@@ -1,4 +1,4 @@
-defmodule Sonet.Identity.User.Actions do
+defmodule Sonet.Identity.Account.Actions do
   use Spark.Dsl.Fragment, of: Ash.Resource
 
   actions do

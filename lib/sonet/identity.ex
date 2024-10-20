@@ -8,7 +8,7 @@ defmodule Sonet.Identity do
 
   json_api do
     routes do
-      base_route "/user", Identity.User do
+      base_route "/user", Identity.Account do
         post :sign_in_with_password do
           route "/login"
 
@@ -27,6 +27,6 @@ defmodule Sonet.Identity do
 
   resources do
     resource Identity.Token
-    resource Identity.User
+    resource Identity.Account
   end
 end

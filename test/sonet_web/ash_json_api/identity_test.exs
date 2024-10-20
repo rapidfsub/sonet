@@ -37,7 +37,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
       bio = Fake.sentence()
 
       user =
-        Ashex.run_create!(Identity.User, :register_with_password,
+        Ashex.run_create!(Identity.Account, :register_with_password,
           params: ~M{email, password, password_confirmation: password, username, bio}
         )
 

@@ -1,4 +1,4 @@
-defmodule Sonet.Identity.User.Senders.SendPasswordResetEmail do
+defmodule Sonet.Identity.Account.Senders.SendPasswordResetEmail do
   @moduledoc """
   Sends a password reset email
   """

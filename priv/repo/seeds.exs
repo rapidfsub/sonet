@@ -27,5 +27,5 @@ user_data =
 
 for params <- user_data do
   params = Map.merge(params, %{password: "password", password_confirmation: "password"})
-  Ashex.run_create!(Identity.User, :register_with_password, params: params)
+  Ashex.run_create!(Identity.Account, :register_with_password, params: params)
 end
