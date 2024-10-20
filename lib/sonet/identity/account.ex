@@ -79,6 +79,20 @@ defmodule Sonet.Identity.Account do
     timestamps()
   end
 
+  relationships do
+    many_to_many :followers, Identity.Account do
+      through Identity.AccountClip
+      source_attribute_on_join_resource :target_id
+      destination_attribute_on_join_resource :owner_id
+    end
+
+    many_to_many :followees, Identity.Account do
+      through Identity.AccountClip
+      source_attribute_on_join_resource :owner_id
+      destination_attribute_on_join_resource :target_id
+    end
+  end
+
   identities do
     identity :unique_email, [:email]
     identity :unique_username, [:username]

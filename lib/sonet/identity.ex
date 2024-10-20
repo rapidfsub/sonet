@@ -29,5 +29,6 @@ defmodule Sonet.Identity do
   resources do
     resource Identity.Token
     resource Identity.Account
+    resource Identity.AccountClip
   end
 end
