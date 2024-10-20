@@ -10,7 +10,7 @@ defmodule Sonet.Identity do
     routes do
       base_route "/user", Identity.Account do
         get :get_current_account, route: "/"
-        get :read, route: "/:username", name: "/user/:username"
+        get :read, route: "/:username"
         post :register_with_password
 
         post :sign_in_with_password do
