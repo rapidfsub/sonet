@@ -1,8 +1,8 @@
 defmodule SonetWeb.AshJsonApi.IdentityTest do
   use SonetWeb.ConnCase
 
-  describe "without user" do
-    test "POST /api/json/user", ~M{conn} do
+  describe "without account" do
+    test "POST /api/json/account", ~M{conn} do
       email = Fake.email()
       password = Fake.sentence()
       username = Fake.word()
@@ -11,7 +11,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
-        |> post(~p"/api/json/user", %{
+        |> post(~p"/api/json/account", %{
           data: %{attributes: ~M{email, password, password_confirmation: password, username, bio}}
         })
 
@@ -19,38 +19,38 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
       assert ~m{^email, ^username, ^bio} = attributes
     end
 
-    test "fail GET /api/json/user", %{conn: conn} do
+    test "fail GET /api/json/account", %{conn: conn} do
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
-        |> get(~p"/api/json/user")
+        |> get(~p"/api/json/account")
 
       assert json_response(conn, 403)
     end
   end
 
-  describe "with user" do
+  describe "with account" do
     setup do
       email = Fake.email()
       password = Fake.sentence()
       username = Fake.word()
       bio = Fake.sentence()
 
-      user =
+      account =
         Ashex.run_create!(Identity.Account, :register_with_password,
           params: ~M{email, password, password_confirmation: password, username, bio}
         )
 
-      %{user: user, email: email, password: password}
+      ~M{account, email, password}
     end
 
-    test "POST /api/json/user/login", ~M{conn, user, email, password} do
-      ~M{username, bio} = user
+    test "POST /api/json/account/login", ~M{conn, account, email, password} do
+      ~M{username, bio} = account
 
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
-        |> post(~p"/api/json/user/login", %{data: %{attributes: ~M{email, password}}})
+        |> post(~p"/api/json/account/login", %{data: %{attributes: ~M{email, password}}})
 
       assert %{
                "data" => %{"attributes" => ~m{^email, ^username, ^bio}},
@@ -58,48 +58,48 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
              } = json_response(conn, 201)
     end
 
-    test "GET /api/json/user", ~M{conn, user, email} do
-      ~M{username, bio} = user
-      token = user.__metadata__.token
+    test "GET /api/json/account", ~M{conn, account, email} do
+      ~M{username, bio} = account
+      token = account.__metadata__.token
 
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
         |> put_req_header("authorization", "Bearer #{token}")
-        |> get(~p"/api/json/user")
+        |> get(~p"/api/json/account")
 
       assert %{"data" => ~m{attributes}} = json_response(conn, 200)
       assert ~m{^email, ^username, ^bio} = attributes
     end
 
-    test "PATCH /api/json/user", ~M{conn, user} do
+    test "PATCH /api/json/account", ~M{conn, account} do
       username = Fake.word()
       bio = Fake.sentence()
-      assert username != user.username
-      assert bio != user.bio
+      assert username != account.username
+      assert bio != account.bio
 
-      token = user.__metadata__.token
+      token = account.__metadata__.token
 
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
         |> put_req_header("authorization", "Bearer #{token}")
-        |> patch(~p"/api/json/user", %{data: %{attributes: ~M{username, bio}}})
+        |> patch(~p"/api/json/account", %{data: %{attributes: ~M{username, bio}}})
 
-      id = user.id
+      id = account.id
       assert %{"data" => ~m{^id, attributes}} = json_response(conn, 200)
       assert ~m{^username, ^bio} = attributes
     end
 
-    test "GET /api/json/user/:username", ~M{conn, user} do
+    test "GET /api/json/account/:username", ~M{conn, account} do
       conn =
         conn
         |> put_req_header("content-type", "application/vnd.api+json")
-        |> get(~p"/api/json/user/#{user.username}")
+        |> get(~p"/api/json/account/#{account.username}")
 
-      id = user.id
+      id = account.id
       assert %{"data" => ~m{^id, attributes}} = json_response(conn, 200)
-      assert attributes["username"] == user.username
+      assert attributes["username"] == account.username
     end
   end
 end

@@ -8,7 +8,7 @@ defmodule Sonet.Identity do
 
   json_api do
     routes do
-      base_route "/user", Identity.Account do
+      base_route "/account", Identity.Account do
         get :get_current_account, route: "/"
         get :read, route: "/:username"
         post :register_with_password
@@ -16,8 +16,8 @@ defmodule Sonet.Identity do
         post :sign_in_with_password do
           route "/login"
 
-          metadata fn _subject, user, _request ->
-            %{token: user.__metadata__.token}
+          metadata fn _subject, account, _request ->
+            %{token: account.__metadata__.token}
           end
         end
 
