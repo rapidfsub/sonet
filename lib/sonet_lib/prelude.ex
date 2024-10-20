@@ -7,6 +7,7 @@ defmodule SonetLib.Prelude do
       alias SonetLib.Enumex
       alias SonetLib.Fake
       alias SonetLib.Form
+      alias SonetLib.Observer
       alias SonetLib.Query
     end
   end
