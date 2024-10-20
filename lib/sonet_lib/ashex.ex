@@ -6,11 +6,14 @@ defmodule SonetLib.Ashex do
      [
        create: 3,
        create!: 3,
+       load: 3,
+       load!: 3,
        read: 2,
        read!: 2,
+       read_one: 2,
+       read_one!: 2,
        update: 3,
-       update!: 3,
-       load!: 3
+       update!: 3
      ]},
     {Ash.DataLayer.Simple,
      [
@@ -43,6 +46,14 @@ defmodule SonetLib.Ashex do
 
   def set_data_and_read!(query, action_name, data, opts1 \\ [], opts2 \\ []) do
     do_set_data_and_read(query, action_name, data, opts1, opts2) |> read!()
+  end
+
+  def set_data_and_read_one(query, action_name, data, opts1 \\ [], opts2 \\ []) do
+    do_set_data_and_read(query, action_name, data, opts1, opts2) |> read_one()
+  end
+
+  def set_data_and_read_one!(query, action_name, data, opts1 \\ [], opts2 \\ []) do
+    do_set_data_and_read(query, action_name, data, opts1, opts2) |> read_one!()
   end
 
   defp do_set_data_and_read(query, action_name, data, opts1, opts2) do

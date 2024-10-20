@@ -41,7 +41,7 @@ defmodule SonetLib.Ash.Policies.ActorTest do
     id = account.id
     assert Ashex.set_data_and_read!(Account, :read, accounts) |> length == 5
 
-    assert [~M{^id}] =
-             Ashex.set_data_and_read!(Account, :get_current_account, accounts, actor: account)
+    assert ~M{^id} =
+             Ashex.set_data_and_read_one!(Account, :get_current_account, accounts, actor: account)
   end
 end
