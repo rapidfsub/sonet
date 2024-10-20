@@ -1,4 +1,4 @@
-defmodule SonetWeb.AshJsonApi.AccountsTest do
+defmodule SonetWeb.AshJsonApi.IdentityTest do
   use SonetWeb.ConnCase
 
   describe "without user" do
@@ -37,7 +37,7 @@ defmodule SonetWeb.AshJsonApi.AccountsTest do
       bio = Fake.sentence()
 
       user =
-        Ashex.run_create!(Accounts.User, :register_with_password,
+        Ashex.run_create!(Identity.User, :register_with_password,
           params: ~M{email, password, password_confirmation: password, username, bio}
         )
 

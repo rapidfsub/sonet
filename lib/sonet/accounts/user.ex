@@ -1,9 +1,9 @@
-defmodule Sonet.Accounts.User do
+defmodule Sonet.Identity.User do
   use Sonet.Prelude
 
   use Ash.Resource,
     otp_app: :sonet,
-    domain: Accounts,
+    domain: Identity,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [
       AshAuthentication,
@@ -11,8 +11,8 @@ defmodule Sonet.Accounts.User do
     ],
     data_layer: AshPostgres.DataLayer,
     fragments: [
-      Accounts.User.Actions,
-      Accounts.User.Read
+      Identity.User.Actions,
+      Identity.User.Read
     ]
 
   json_api do
@@ -22,7 +22,7 @@ defmodule Sonet.Accounts.User do
   authentication do
     tokens do
       enabled? true
-      token_resource Accounts.Token
+      token_resource Identity.Token
       signing_secret Sonet.Secrets
     end
 
@@ -31,7 +31,7 @@ defmodule Sonet.Accounts.User do
         identity_field :email
 
         resettable do
-          sender Accounts.User.Senders.SendPasswordResetEmail
+          sender Identity.User.Senders.SendPasswordResetEmail
         end
       end
     end

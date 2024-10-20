@@ -52,7 +52,7 @@ defmodule SonetWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    auth_routes AuthController, Accounts.User, path: "/auth"
+    auth_routes AuthController, Identity.User, path: "/auth"
     sign_out_route AuthController
 
     # Remove these if you'd like to use your own authentication views

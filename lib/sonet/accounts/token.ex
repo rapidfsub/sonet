@@ -1,14 +1,14 @@
-defmodule Sonet.Accounts.Token do
+defmodule Sonet.Identity.Token do
   use Sonet.Prelude
 
   use Ash.Resource,
     otp_app: :sonet,
-    domain: Accounts,
+    domain: Identity,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshAuthentication.TokenResource],
     data_layer: AshPostgres.DataLayer,
     fragments: [
-      Accounts.Token.Actions
+      Identity.Token.Actions
     ]
 
   postgres do
