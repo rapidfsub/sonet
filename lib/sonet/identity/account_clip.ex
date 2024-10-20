@@ -12,6 +12,23 @@ defmodule Sonet.Identity.AccountClip do
     repo Repo
   end
 
+  actions do
+    defaults [:destroy, update: :*]
+
+    create :upsert do
+      primary? true
+      accept :*
+      upsert? true
+      upsert_identity :unique_owner_target
+      change relate_actor(:owner)
+    end
+
+    read :list_actives do
+      primary? true
+      filter expr(is_active)
+    end
+  end
+
   policies do
     policy always() do
       authorize_if always()

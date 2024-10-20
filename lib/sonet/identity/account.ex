@@ -57,6 +57,7 @@ defmodule Sonet.Identity.Account do
       access_type :strict
       authorize_if action(:get_current_account)
       authorize_if action(:update_current_account)
+      authorize_if action(:follow)
     end
 
     policy action(:get_current_account) do
@@ -65,6 +66,11 @@ defmodule Sonet.Identity.Account do
     end
 
     policy action(:update_current_account) do
+      access_type :strict
+      authorize_if actor_present()
+    end
+
+    policy action(:follow) do
       access_type :strict
       authorize_if actor_present()
     end
@@ -80,6 +86,8 @@ defmodule Sonet.Identity.Account do
   end
 
   relationships do
+    has_many :follower_clips, Identity.AccountClip, destination_attribute: :target_id
+
     many_to_many :followers, Identity.Account do
       through Identity.AccountClip
       source_attribute_on_join_resource :target_id
@@ -91,6 +99,10 @@ defmodule Sonet.Identity.Account do
       source_attribute_on_join_resource :owner_id
       destination_attribute_on_join_resource :target_id
     end
+  end
+
+  calculations do
+    calculate :is_following, :boolean, expr(exists(followers, id == ^actor(:id)))
   end
 
   identities do
