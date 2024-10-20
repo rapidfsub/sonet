@@ -29,8 +29,49 @@ defmodule Sonet.Repo.Migrations.Genesis do
         default: fragment("(now() AT TIME ZONE 'utc')")
     end
 
+    create table(:account_clip, primary_key: false) do
+      add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
+      add :is_active, :boolean, null: false
+
+      add :inserted_at, :utc_datetime_usec,
+        null: false,
+        default: fragment("(now() AT TIME ZONE 'utc')")
+
+      add :updated_at, :utc_datetime_usec,
+        null: false,
+        default: fragment("(now() AT TIME ZONE 'utc')")
+
+      add :owner_id, :uuid, null: false
+      add :target_id, :uuid, null: false
+    end
+
     create table(:account, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
+    end
+
+    alter table(:account_clip) do
+      modify :owner_id,
+             references(:account,
+               column: :id,
+               name: "account_clip_owner_id_fkey",
+               type: :uuid,
+               prefix: "public"
+             )
+
+      modify :target_id,
+             references(:account,
+               column: :id,
+               name: "account_clip_target_id_fkey",
+               type: :uuid,
+               prefix: "public"
+             )
+    end
+
+    create unique_index(:account_clip, [:owner_id, :target_id],
+             name: "account_clip_unique_owner_target_index"
+           )
+
+    alter table(:account) do
       add :email, :citext, null: false
       add :hashed_password, :text, null: false
       add :username, :text, null: false
@@ -55,7 +96,31 @@ defmodule Sonet.Repo.Migrations.Genesis do
 
     drop_if_exists unique_index(:account, [:email], name: "account_unique_email_index")
 
+    alter table(:account) do
+      remove :updated_at
+      remove :inserted_at
+      remove :bio
+      remove :username
+      remove :hashed_password
+      remove :email
+    end
+
+    drop_if_exists unique_index(:account_clip, [:owner_id, :target_id],
+                     name: "account_clip_unique_owner_target_index"
+                   )
+
+    drop constraint(:account_clip, "account_clip_owner_id_fkey")
+
+    drop constraint(:account_clip, "account_clip_target_id_fkey")
+
+    alter table(:account_clip) do
+      modify :target_id, :uuid
+      modify :owner_id, :uuid
+    end
+
     drop table(:account)
+
+    drop table(:account_clip)
 
     drop table(:token)
   end
