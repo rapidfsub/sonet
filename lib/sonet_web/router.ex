@@ -19,7 +19,7 @@ defmodule SonetWeb.Router do
     plug :accepts, ["json"]
     # added
     plug :load_from_bearer
-    plug :set_actor, :user
+    plug :set_actor, :account
   end
 
   scope "/api/json" do
