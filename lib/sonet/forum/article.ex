@@ -27,6 +27,9 @@ defmodule Sonet.Forum.Article do
 
   attributes do
     uuid_v7_primary_key :id
+    attribute :title, :string, allow_nil?: false, public?: true
+    attribute :description, :string, public?: true
+    attribute :body, :string, public?: true
     timestamps()
   end
 end
