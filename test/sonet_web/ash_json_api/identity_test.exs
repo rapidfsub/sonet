@@ -1,5 +1,5 @@
 defmodule SonetWeb.AshJsonApi.IdentityTest do
-  use SonetWeb.ConnCase
+  use SonetWeb.JsonApiCase
 
   describe "without account" do
     test "POST /api/json/account", ~M{conn} do
@@ -10,7 +10,6 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
 
       conn =
         conn
-        |> put_req_header("content-type", "application/vnd.api+json")
         |> post(~p"/api/json/account", %{
           data: %{attributes: ~M{email, password, password_confirmation: password, username, bio}}
         })
@@ -20,11 +19,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
     end
 
     test "fail GET /api/json/account", %{conn: conn} do
-      conn =
-        conn
-        |> put_req_header("content-type", "application/vnd.api+json")
-        |> get(~p"/api/json/account")
-
+      conn = conn |> get(~p"/api/json/account")
       assert json_response(conn, 403)
     end
   end
@@ -59,7 +54,6 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
 
       conn =
         conn
-        |> put_req_header("content-type", "application/vnd.api+json")
         |> post(~p"/api/json/account/login", %{data: %{attributes: ~M{email, password}}})
 
       assert %{
@@ -74,7 +68,6 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
 
       conn =
         conn
-        |> put_req_header("content-type", "application/vnd.api+json")
         |> put_req_header("authorization", "Bearer #{token}")
         |> get(~p"/api/json/account")
 
@@ -92,7 +85,6 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
 
       conn =
         conn
-        |> put_req_header("content-type", "application/vnd.api+json")
         |> put_req_header("authorization", "Bearer #{token}")
         |> patch(~p"/api/json/account", %{data: %{attributes: ~M{username, bio}}})
 
@@ -102,11 +94,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
     end
 
     test "GET /api/json/profile/:username", ~M{conn, account} do
-      conn =
-        conn
-        |> put_req_header("content-type", "application/vnd.api+json")
-        |> get(~p"/api/json/profile/#{account.username}")
-
+      conn = conn |> get(~p"/api/json/profile/#{account.username}")
       id = account.id
       assert %{"data" => ~m{^id, attributes}} = json_response(conn, 200)
       assert attributes["username"] == account.username
@@ -118,7 +106,6 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
       for is_following <- [true, false, true, false] do
         conn =
           conn
-          |> put_req_header("content-type", "application/vnd.api+json")
           |> put_req_header("authorization", "Bearer #{token}")
           |> patch(~p"/api/json/profile/#{influencer.username}/follow", %{
             data: %{attributes: ~M{is_following}}
