@@ -31,7 +31,6 @@ defmodule Sonet.Repo.Migrations.Genesis do
 
     create table(:account_clip, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
-      add :is_active, :boolean, null: false
 
       add :inserted_at, :utc_datetime_usec,
         null: false,
@@ -43,6 +42,7 @@ defmodule Sonet.Repo.Migrations.Genesis do
 
       add :owner_id, :uuid, null: false
       add :target_id, :uuid, null: false
+      add :archived_at, :utc_datetime_usec
     end
 
     create table(:account, primary_key: false) do
@@ -84,6 +84,8 @@ defmodule Sonet.Repo.Migrations.Genesis do
       add :updated_at, :utc_datetime_usec,
         null: false,
         default: fragment("(now() AT TIME ZONE 'utc')")
+
+      add :archived_at, :utc_datetime_usec
     end
 
     create unique_index(:account, [:email], name: "account_unique_email_index")
@@ -97,6 +99,7 @@ defmodule Sonet.Repo.Migrations.Genesis do
     drop_if_exists unique_index(:account, [:email], name: "account_unique_email_index")
 
     alter table(:account) do
+      remove :archived_at
       remove :updated_at
       remove :inserted_at
       remove :bio

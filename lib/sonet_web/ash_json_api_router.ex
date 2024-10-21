@@ -6,23 +6,20 @@ defmodule SonetWeb.AshJsonApiRouter do
       Identity
     ],
     open_api: "/open_api",
+    open_api_servers: ["/api/json"],
     modify_open_api: {__MODULE__, :modify_open_api, []}
 
-  @prefix "/api/json"
   def modify_open_api(%OpenApiSpex.OpenApi{} = spec, _, _) do
     schemes = %{"authorization" => %OpenApiSpex.SecurityScheme{type: "http", scheme: "bearer"}}
     components = %{spec.components | securitySchemes: schemes}
     security = [%{"authorization" => []}]
 
-    [%OpenApiSpex.Server{} = server] = spec.servers
-    url = Path.join([server.url, @prefix])
-    servers = [%{server | url: url}]
-
     paths =
-      Map.new(spec.paths, fn {k, v} ->
-        {String.replace_prefix(k, @prefix, ""), v}
-      end)
+      for {path, path_item} <- spec.paths, into: %{} do
+        "/api/json" <> compact_path = path
+        {compact_path, path_item}
+      end
 
-    ~M{spec | components, security, servers, paths}
+    ~M{spec | components, security, paths}
   end
 end

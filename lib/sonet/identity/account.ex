@@ -5,11 +5,12 @@ defmodule Sonet.Identity.Account do
     otp_app: :sonet,
     domain: Identity,
     authorizers: [Ash.Policy.Authorizer],
+    data_layer: AshPostgres.DataLayer,
     extensions: [
+      AshArchival.Resource,
       AshAuthentication,
       AshJsonApi.Resource
     ],
-    data_layer: AshPostgres.DataLayer,
     fragments: [
       Identity.Account.Actions,
       Identity.Account.Read
@@ -37,6 +38,10 @@ defmodule Sonet.Identity.Account do
     end
   end
 
+  archive do
+    archive_related [:follower_clips, :followee_clips]
+  end
+
   postgres do
     table "account"
     repo Repo
@@ -58,6 +63,7 @@ defmodule Sonet.Identity.Account do
       authorize_if action(:get_current_account)
       authorize_if action(:update_current_account)
       authorize_if action(:follow)
+      authorize_if action(:destroy)
     end
 
     policy action(:get_current_account) do
@@ -74,6 +80,11 @@ defmodule Sonet.Identity.Account do
       access_type :strict
       authorize_if actor_present()
     end
+
+    policy action(:destroy) do
+      access_type :strict
+      authorize_if actor_present()
+    end
   end
 
   attributes do
@@ -86,8 +97,6 @@ defmodule Sonet.Identity.Account do
   end
 
   relationships do
-    has_many :follower_clips, Identity.AccountClip, destination_attribute: :target_id
-
     many_to_many :followers, Identity.Account do
       through Identity.AccountClip
       source_attribute_on_join_resource :target_id

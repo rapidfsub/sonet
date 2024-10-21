@@ -5,7 +5,10 @@ defmodule Sonet.Identity.AccountClip do
     otp_app: :sonet,
     domain: Identity,
     authorizers: [Ash.Policy.Authorizer],
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [
+      AshArchival.Resource
+    ]
 
   postgres do
     table "account_clip"
@@ -13,19 +16,14 @@ defmodule Sonet.Identity.AccountClip do
   end
 
   actions do
-    defaults [:destroy, update: :*]
+    defaults [:read, :destroy, update: :*]
 
-    create :upsert do
+    create :create_or_unarchive do
       primary? true
       accept :*
       upsert? true
       upsert_identity :unique_owner_target
       change relate_actor(:owner)
-    end
-
-    read :list_actives do
-      primary? true
-      filter expr(is_active)
     end
   end
 
@@ -37,7 +35,6 @@ defmodule Sonet.Identity.AccountClip do
 
   attributes do
     uuid_v7_primary_key :id
-    attribute :is_active, :boolean, allow_nil?: false, public?: true
     timestamps()
   end
 
