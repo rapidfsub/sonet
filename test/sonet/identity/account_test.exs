@@ -2,7 +2,7 @@ defmodule Sonet.Identity.AccountTest do
   use Sonet.DataCase
   doctest Sonet.Identity.Account
 
-  test "a" do
+  test "follow" do
     [a1, a2] =
       for _ <- 1..2 do
         email = Fake.email()
