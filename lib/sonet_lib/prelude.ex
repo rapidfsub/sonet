@@ -10,6 +10,7 @@ defmodule SonetLib.Prelude do
       alias SonetLib.Form
       alias SonetLib.Observer
       alias SonetLib.Query
+      alias SonetLib.Slugex
 
       import SonetLib.Pipe
       import TinyMaps
