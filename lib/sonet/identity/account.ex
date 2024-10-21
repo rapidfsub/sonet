@@ -97,9 +97,6 @@ defmodule Sonet.Identity.Account do
   end
 
   relationships do
-    has_many :follower_clips, Identity.AccountClip, destination_attribute: :target_id
-    has_many :followee_clips, Identity.AccountClip, destination_attribute: :owner_id
-
     many_to_many :followers, Identity.Account do
       through Identity.AccountClip
       source_attribute_on_join_resource :target_id
