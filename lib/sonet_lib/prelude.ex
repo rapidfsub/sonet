@@ -11,6 +11,7 @@ defmodule SonetLib.Prelude do
       alias SonetLib.Observer
       alias SonetLib.Query
 
+      import SonetLib.Pipe
       import TinyMaps
     end
   end
