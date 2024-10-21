@@ -104,6 +104,8 @@ defmodule Sonet.Identity.Account do
       source_attribute_on_join_resource :owner_id
       destination_attribute_on_join_resource :target_id
     end
+
+    has_many :articles, Forum.Article, destination_attribute: :author_id
   end
 
   calculations do

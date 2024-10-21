@@ -20,11 +20,21 @@ defmodule Sonet.Forum.Article do
   end
 
   actions do
-    defaults [:read, :destroy, create: :*, update: :*]
+    defaults [:read, :destroy, update: :*]
+
+    create :create do
+      primary? true
+      accept :*
+      change relate_actor(:author)
+    end
   end
 
   policies do
-    policy always() do
+    policy action(:create) do
+      authorize_if actor_present()
+    end
+
+    policy action(:read) do
       authorize_if always()
     end
   end
@@ -46,6 +56,10 @@ defmodule Sonet.Forum.Article do
     attribute :body, :string, public?: true
     attribute :slug, :ci_string, allow_nil?: false, public?: true, writable?: false
     timestamps()
+  end
+
+  relationships do
+    belongs_to :author, Identity.Account, allow_nil?: false, public?: true
   end
 
   identities do
