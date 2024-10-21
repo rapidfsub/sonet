@@ -31,7 +31,6 @@ defmodule SonetWeb.ConnCase do
 
       # added
       import AssertValue
-      import TinyMaps
       use SonetWeb.Prelude
     end
   end

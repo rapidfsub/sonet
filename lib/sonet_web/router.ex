@@ -30,6 +30,10 @@ defmodule SonetWeb.Router do
             path: "/api/json/open_api",
             default_model_expand_depth: 4
 
+    forward "/api/redoc",
+            Redoc.Plug.RedocUI,
+            spec_url: "/api/json/open_api"
+
     forward "/", SonetWeb.AshJsonApiRouter
   end
 

@@ -28,7 +28,6 @@ defmodule Sonet.DataCase do
 
       # added
       import AssertValue
-      import TinyMaps
       use Sonet.Prelude
     end
   end
