@@ -29,6 +29,25 @@ defmodule Sonet.Repo.Migrations.Genesis do
         default: fragment("(now() AT TIME ZONE 'utc')")
     end
 
+    create table(:article, primary_key: false) do
+      add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
+      add :title, :text, null: false
+      add :description, :text
+      add :body, :text
+      add :slug, :citext, null: false
+
+      add :inserted_at, :utc_datetime_usec,
+        null: false,
+        default: fragment("(now() AT TIME ZONE 'utc')")
+
+      add :updated_at, :utc_datetime_usec,
+        null: false,
+        default: fragment("(now() AT TIME ZONE 'utc')")
+
+      add :author_id, :uuid, null: false
+      add :archived_at, :utc_datetime_usec
+    end
+
     create table(:account_clip, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
 
@@ -48,6 +67,18 @@ defmodule Sonet.Repo.Migrations.Genesis do
     create table(:account, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
     end
+
+    alter table(:article) do
+      modify :author_id,
+             references(:account,
+               column: :id,
+               name: "article_author_id_fkey",
+               type: :uuid,
+               prefix: "public"
+             )
+    end
+
+    create unique_index(:article, [:slug], name: "article_unique_slug_index")
 
     alter table(:account_clip) do
       modify :owner_id,
@@ -121,9 +152,19 @@ defmodule Sonet.Repo.Migrations.Genesis do
       modify :owner_id, :uuid
     end
 
+    drop_if_exists unique_index(:article, [:slug], name: "article_unique_slug_index")
+
+    drop constraint(:article, "article_author_id_fkey")
+
+    alter table(:article) do
+      modify :author_id, :uuid
+    end
+
     drop table(:account)
 
     drop table(:account_clip)
+
+    drop table(:article)
 
     drop table(:token)
   end

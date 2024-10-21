@@ -17,27 +17,7 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "email",
-      "type": "citext"
-    },
-    {
-      "allow_nil?": false,
-      "default": "nil",
-      "generated?": false,
-      "primary_key?": false,
-      "references": null,
-      "size": null,
-      "source": "hashed_password",
-      "type": "text"
-    },
-    {
-      "allow_nil?": false,
-      "default": "nil",
-      "generated?": false,
-      "primary_key?": false,
-      "references": null,
-      "size": null,
-      "source": "username",
+      "source": "title",
       "type": "text"
     },
     {
@@ -47,8 +27,28 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "bio",
+      "source": "description",
       "type": "text"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "body",
+      "type": "text"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "slug",
+      "type": "citext"
     },
     {
       "allow_nil?": false,
@@ -71,6 +71,35 @@
       "type": "utc_datetime_usec"
     },
     {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "article_author_id_fkey",
+        "on_delete": null,
+        "on_update": null,
+        "primary_key?": true,
+        "schema": "public",
+        "table": "account"
+      },
+      "size": null,
+      "source": "author_id",
+      "type": "uuid"
+    },
+    {
       "allow_nil?": true,
       "default": "nil",
       "generated?": false,
@@ -86,33 +115,19 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "8F29481480F506EC5485DFA1B80C3A7A16DC2509C9F15F952FDC29D45C8D4055",
+  "hash": "D23A4DC81FF9BDAC059FC784372A34554E8EDCDC81FB3D477E688087B253099E",
   "identities": [
     {
       "all_tenants?": false,
       "base_filter": null,
-      "index_name": "account_unique_email_index",
+      "index_name": "article_unique_slug_index",
       "keys": [
         {
           "type": "atom",
-          "value": "email"
+          "value": "slug"
         }
       ],
-      "name": "unique_email",
-      "nils_distinct?": true,
-      "where": null
-    },
-    {
-      "all_tenants?": false,
-      "base_filter": null,
-      "index_name": "account_unique_username_index",
-      "keys": [
-        {
-          "type": "atom",
-          "value": "username"
-        }
-      ],
-      "name": "unique_username",
+      "name": "unique_slug",
       "nils_distinct?": true,
       "where": null
     }
@@ -124,5 +139,5 @@
   },
   "repo": "Elixir.Sonet.Repo",
   "schema": null,
-  "table": "account"
+  "table": "article"
 }

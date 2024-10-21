@@ -19,10 +19,16 @@ account_data = [
   %{email: "myrtice2094@example.org", username: "Bloom Farms"}
 ]
 
-[a1, a2 | [a3, a4, _a5] = accounts] =
+[a1, a2 | [a3, _a4, _a5] = accounts] =
   for params <- account_data do
     params = Map.merge(params, %{password: "password", password_confirmation: "password"})
-    Ashex.run_create!(Identity.Account, :register_with_password, params: params)
+    account = Ashex.run_create!(Identity.Account, :register_with_password, params: params)
+
+    for _ <- 1..3 do
+      Ashex.run_create!(Forum.Article, :create, actor: account, params: %{title: Fake.sentence()})
+    end
+
+    account
   end
 
 for actor <- accounts do
