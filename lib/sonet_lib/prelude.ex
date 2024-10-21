@@ -3,6 +3,7 @@ defmodule SonetLib.Prelude do
     quote do
       alias SonetLib.Ashex
       alias SonetLib.Changeset
+      alias SonetLib.Conn
       alias SonetLib.Delegate
       alias SonetLib.Enumex
       alias SonetLib.Fake

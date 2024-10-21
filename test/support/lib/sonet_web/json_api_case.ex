@@ -12,7 +12,7 @@ defmodule SonetWeb.JsonApiCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import SonetWeb.ConnCase
+      import unquote(__MODULE__)
 
       # added
       import AssertValue
@@ -24,8 +24,8 @@ defmodule SonetWeb.JsonApiCase do
     Sonet.DataCase.setup_sandbox(tags)
 
     conn =
-      Phoenix.ConnTest.build_conn()
-      |> Plug.Conn.put_req_header("content-type", "application/vnd.api+json")
+      Conn.build_test_conn()
+      |> Conn.put_req_header("content-type", "application/vnd.api+json")
 
     ~M{conn}
   end
