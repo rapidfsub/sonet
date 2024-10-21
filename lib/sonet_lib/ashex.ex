@@ -19,6 +19,10 @@ defmodule SonetLib.Ashex do
        update: 3,
        update!: 3
      ]},
+    {Ash.Context,
+     [
+       to_opts: 2
+     ]},
     {Ash.DataLayer.Simple,
      [
        set_data: 2
@@ -73,5 +77,13 @@ defmodule SonetLib.Ashex do
   defp do_set_data_and_read(query, action_name, data, opts1, opts2) do
     {params, opts} = pop_params(opts1, opts2)
     Query.for_read(query, action_name, params, opts) |> Ash.DataLayer.Simple.set_data(data)
+  end
+
+  def get_actor(ctx) do
+    to_opts(ctx)[:actor]
+  end
+
+  def get_actor_id(ctx) do
+    get_in(get_actor(ctx).id)
   end
 end

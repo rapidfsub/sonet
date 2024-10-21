@@ -86,15 +86,20 @@ defmodule Sonet.Identity.Account.Actions do
 
     update :follow do
       argument :is_following, :boolean, allow_nil?: false
-      argument :follower_clip, :map, public?: false
+      argument :follower_id, :string, public?: false
       require_atomic? false
 
-      change fn changeset, _ctx ->
-        is_active = Changeset.get_argument(changeset, :is_following)
-        Changeset.set_argument(changeset, :follower_clip, %{is_active: is_active})
+      change fn changeset, ctx ->
+        Ashex.get_actor_id(ctx)
+        ~> Changeset.set_argument(changeset, :follower_id)
       end
 
-      change manage_relationship(:follower_clip, :follower_clips, type: :create)
+      change manage_relationship(:follower_id, :followers, on_lookup: :relate, value_is_key: :id),
+        where: argument_equals(:is_following, true)
+
+      change manage_relationship(:follower_id, :followers, on_match: :unrelate, value_is_key: :id),
+        where: argument_equals(:is_following, false)
+
       change load([:is_following])
     end
   end
