@@ -38,10 +38,6 @@ defmodule Sonet.Identity.Account do
     end
   end
 
-  archive do
-    archive_related [:follower_clips, :followee_clips]
-  end
-
   postgres do
     table "account"
     repo Repo
@@ -108,6 +104,8 @@ defmodule Sonet.Identity.Account do
       source_attribute_on_join_resource :owner_id
       destination_attribute_on_join_resource :target_id
     end
+
+    has_many :articles, Forum.Article, destination_attribute: :author_id
   end
 
   calculations do
