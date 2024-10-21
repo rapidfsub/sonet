@@ -21,12 +21,9 @@ defmodule Sonet.Identity do
         end
 
         patch :update_current_account, route: "/", read_action: :get_current_account
-      end
-
-      @default_fields [:username, :bio, :is_following]
-      base_route "/profile", Identity.Account do
         get :read, route: "/:username"
 
+        @default_fields [:username, :bio, :is_following]
         patch :follow do
           route "/:username/follow"
           default_fields @default_fields
