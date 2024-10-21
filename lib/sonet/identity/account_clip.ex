@@ -5,7 +5,10 @@ defmodule Sonet.Identity.AccountClip do
     otp_app: :sonet,
     domain: Identity,
     authorizers: [Ash.Policy.Authorizer],
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [
+      AshArchival.Resource
+    ]
 
   postgres do
     table "account_clip"

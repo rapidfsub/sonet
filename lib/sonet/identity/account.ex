@@ -5,11 +5,12 @@ defmodule Sonet.Identity.Account do
     otp_app: :sonet,
     domain: Identity,
     authorizers: [Ash.Policy.Authorizer],
+    data_layer: AshPostgres.DataLayer,
     extensions: [
+      AshArchival.Resource,
       AshAuthentication,
       AshJsonApi.Resource
     ],
-    data_layer: AshPostgres.DataLayer,
     fragments: [
       Identity.Account.Actions,
       Identity.Account.Read
