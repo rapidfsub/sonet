@@ -8,6 +8,8 @@ defmodule SonetLib.Ashex do
        create!: 3,
        destroy: 2,
        destroy!: 2,
+       get: 3,
+       get!: 3,
        load: 3,
        load!: 3,
        read: 2,
