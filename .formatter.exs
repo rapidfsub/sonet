@@ -1,11 +1,12 @@
 [
   import_deps: [
-    :assert_value,
-    :ash_json_api,
-    :ash_authentication_phoenix,
-    :ash_authentication,
-    :ash_postgres,
     :ash,
+    :ash_archival,
+    :ash_authentication,
+    :ash_authentication_phoenix,
+    :ash_json_api,
+    :ash_postgres,
+    :assert_value,
     :ecto,
     :ecto_sql,
     :phoenix

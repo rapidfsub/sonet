@@ -39,6 +39,7 @@ defmodule Sonet.MixProject do
       {:tiny_maps, ">= 0.0.0"},
       # ash deps
       {:ash, ">= 0.0.0"},
+      {:ash_archival, ">= 0.0.0"},
       {:ash_authentication, ">= 0.0.0"},
       {:ash_authentication_phoenix, ">= 0.0.0"},
       {:ash_json_api, ">= 0.0.0"},
