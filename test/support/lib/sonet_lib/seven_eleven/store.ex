@@ -50,6 +50,5 @@ defmodule SonetLib.SevenEleven.Store do
 
   relationships do
     has_many :inventories, SevenEleven.Inventory, destination_attribute: :store_id
-    has_many :transactions, SevenEleven.Transaction, destination_attribute: :store_id
   end
 end

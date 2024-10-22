@@ -29,8 +29,4 @@ defmodule SonetLib.SevenEleven.Customer do
     uuid_v7_primary_key :id
     attribute :age, :integer, allow_nil?: false, public?: true
   end
-
-  relationships do
-    has_many :transactions, SevenEleven.Transaction, destination_attribute: :customer_id
-  end
 end

@@ -7,6 +7,5 @@ defmodule SonetLib.SevenEleven do
     resource SevenEleven.Inventory
     resource SevenEleven.Product
     resource SevenEleven.Store
-    resource SevenEleven.Transaction
   end
 end

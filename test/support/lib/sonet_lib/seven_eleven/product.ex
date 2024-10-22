@@ -52,7 +52,5 @@ defmodule SonetLib.SevenEleven.Product do
       public? true
       attribute_writable? false
     end
-
-    has_many :transactions, SevenEleven.Transaction, destination_attribute: :product_id
   end
 end
