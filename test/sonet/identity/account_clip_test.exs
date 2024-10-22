@@ -10,7 +10,7 @@ defmodule Sonet.Identity.AccountClipTest do
             email: Fake.email(),
             password: "password",
             password_confirmation: "password",
-            username: Fake.word()
+            username: Fake.username()
           }
         )
       end

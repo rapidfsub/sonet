@@ -4,7 +4,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
   test "POST /api/json/account", ~M{conn} do
     email = Fake.email()
     password = Fake.sentence()
-    username = Fake.word()
+    username = Fake.username()
     bio = Fake.sentence()
 
     conn =
@@ -42,7 +42,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
 
     conn =
       conn
-      |> put_req_header("authorization", "Bearer #{token}")
+      |> Conn.put_bearer_token(token)
       |> get(~p"/api/json/account")
 
     assert %{"data" => ~m{attributes}} = json_response(conn, 200)
@@ -50,14 +50,14 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
   end
 
   test "PATCH /api/json/account", ~M{conn, account, token} do
-    username = Fake.word()
+    username = Fake.username()
     bio = Fake.sentence()
     assert username != account.username
     assert bio != account.bio
 
     conn =
       conn
-      |> put_req_header("authorization", "Bearer #{token}")
+      |> Conn.put_bearer_token(token)
       |> patch(~p"/api/json/account", %{data: %{attributes: ~M{username, bio}}})
 
     id = account.id
@@ -76,7 +76,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
     for is_following <- [true, false, true, false] do
       conn =
         conn
-        |> put_req_header("authorization", "Bearer #{token}")
+        |> Conn.put_bearer_token(token)
         |> patch(~p"/api/json/account/#{account0.username}/follow", %{
           data: %{attributes: ~M{is_following}}
         })

@@ -9,7 +9,7 @@ defmodule SonetWeb.AshJsonApi.ForumTest do
 
     conn =
       conn
-      |> put_req_header("authorization", "Bearer #{token}")
+      |> Conn.put_bearer_token(token)
       |> post(~p"/api/json/article?#{[include: "author"]}", %{
         data: %{attributes: ~M{title, description, body}}
       })
