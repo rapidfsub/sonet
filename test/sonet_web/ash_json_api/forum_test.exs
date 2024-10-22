@@ -30,9 +30,11 @@ defmodule SonetWeb.AshJsonApi.ForumTest do
         data: %{attributes: ~M{title, description, body}}
       })
 
-    assert %{"data" => ~m{attributes, relationships}} = json_response(conn, 201)
-    assert ~m{^title, ^description, ^body} = attributes
-    account_id = account.id
-    assert %{"author" => %{"data" => %{"id" => ^account_id}}} = relationships
+    assert ~m{data, included} = json_response(conn, 201)
+    assert %{"attributes" => ~m{^title, ^description, ^body}} = data
+
+    with ~M{id, username} = account do
+      assert [%{"id" => ^id, "attributes" => ~m{^username}}] = included
+    end
   end
 end
