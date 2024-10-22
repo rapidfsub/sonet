@@ -12,6 +12,7 @@ defmodule Sonet.Forum.Article do
 
   json_api do
     type "article"
+    includes author: []
   end
 
   postgres do
@@ -59,7 +60,11 @@ defmodule Sonet.Forum.Article do
   end
 
   relationships do
-    belongs_to :author, Identity.Account, allow_nil?: false, public?: true
+    belongs_to :author, Identity.Account do
+      allow_nil? false
+      public? true
+      attribute_writable? false
+    end
   end
 
   identities do

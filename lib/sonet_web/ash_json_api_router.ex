@@ -3,6 +3,7 @@ defmodule SonetWeb.AshJsonApiRouter do
 
   use AshJsonApi.Router,
     domains: [
+      Forum,
       Identity
     ],
     open_api: "/open_api",

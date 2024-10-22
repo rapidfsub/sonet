@@ -1,4 +1,5 @@
 defmodule Sonet.Identity.Account.Read do
+  use Sonet.Prelude
   use Spark.Dsl.Fragment, of: Ash.Resource
 
   actions do
@@ -75,7 +76,7 @@ defmodule Sonet.Identity.Account.Read do
       get? true
 
       manual fn _query, _, ctx ->
-        {:ok, List.wrap(ctx[:actor])}
+        List.wrap(ctx[:actor]) ~> :ok
       end
     end
   end
