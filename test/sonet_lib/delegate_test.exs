@@ -24,4 +24,12 @@ defmodule SonetLib.DelegateTest do
                       }, %{delegate_to: {Enum, :max, 3}}}
                    ]
   end
+
+  test "error if not existing function is passed" do
+    assert_raise MatchError, fn ->
+      defmodule MyEnum do
+        use Delegate, [{Enum, [not_existing_fun: 0]}]
+      end
+    end
+  end
 end
