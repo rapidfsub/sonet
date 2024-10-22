@@ -4,7 +4,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
   test "POST /api/json/account", ~M{conn} do
     email = Fake.email()
     password = Fake.sentence()
-    username = Fake.word()
+    username = Fake.username()
     bio = Fake.sentence()
 
     conn =
@@ -50,7 +50,7 @@ defmodule SonetWeb.AshJsonApi.IdentityTest do
   end
 
   test "PATCH /api/json/account", ~M{conn, account, token} do
-    username = Fake.word()
+    username = Fake.username()
     bio = Fake.sentence()
     assert username != account.username
     assert bio != account.bio
