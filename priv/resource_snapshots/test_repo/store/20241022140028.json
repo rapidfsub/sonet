@@ -17,8 +17,18 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "email",
-      "type": "citext"
+      "source": "open_time",
+      "type": "time"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": null,
+      "size": null,
+      "source": "close_time",
+      "type": "time"
     }
   ],
   "base_filter": null,
@@ -26,23 +36,8 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "F596C605516743C06C07245C1A9AD6C91A43772FE8A574A35460A88FE212A9C8",
-  "identities": [
-    {
-      "all_tenants?": false,
-      "base_filter": null,
-      "index_name": "user_unique_email_index",
-      "keys": [
-        {
-          "type": "atom",
-          "value": "email"
-        }
-      ],
-      "name": "unique_email",
-      "nils_distinct?": true,
-      "where": null
-    }
-  ],
+  "hash": "AC4D51872CD7ABCC2C3727C4481347903FDBCB43C7B10CEA037ADBBC331661CE",
+  "identities": [],
   "multitenancy": {
     "attribute": null,
     "global": null,
@@ -50,5 +45,5 @@
   },
   "repo": "Elixir.SonetLib.TestRepo",
   "schema": null,
-  "table": "user"
+  "table": "store"
 }
