@@ -23,8 +23,6 @@ defmodule SonetLib.SevenEleven.Product do
 
     update :purchase do
       require_atomic? false
-      # argument :transaction, :map, allow_nil?: false, public?: false, default: %{count: 1}
-      # change manage_relationship(:transaction, :transactions, type: :create)
     end
   end
 
@@ -37,12 +35,9 @@ defmodule SonetLib.SevenEleven.Product do
       authorize_if always()
     end
 
-    # policy action(:purchase) do`
-
     policy action(:purchase) do
       forbid_unless actor_present()
-      forbid_unless expr(not is_adult_only or ^actor(:age) >= 19)
-      authorize_if always()
+      authorize_if expr(not is_adult_only or ^actor(:age) >= 19)
     end
   end
 

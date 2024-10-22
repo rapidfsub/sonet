@@ -91,36 +91,49 @@ defmodule SonetLib.Ash.Policies.CommonTest do
 
   describe "ash_postgres" do
     test "test complex policy with nested resources" do
-      assert customer = Ashex.run_create!(SevenEleven.Customer, :create, params: %{age: 20})
-      assert minor = Ashex.run_create!(SevenEleven.Customer, :create, params: %{age: 14})
+      customer = Ashex.run_create!(SevenEleven.Customer, :create, params: %{age: 20})
+      minor = Ashex.run_create!(SevenEleven.Customer, :create, params: %{age: 14})
 
-      assert store =
-               Ashex.run_create!(SevenEleven.Store, :create,
-                 params: %{open_time: ~T[15:00:00], close_time: ~T[21:00:00]}
-               )
+      store =
+        Ashex.run_create!(SevenEleven.Store, :create,
+          params: %{open_time: ~T[15:00:00], close_time: ~T[21:00:00]}
+        )
 
-      assert product =
-               Ashex.run_create!(SevenEleven.Product, :create,
-                 params: %{store_id: store.id, is_adult_only: true}
-               )
+      product =
+        Ashex.run_create!(SevenEleven.Product, :create,
+          params: %{store_id: store.id, is_adult_only: true}
+        )
 
-      assert {:error, %{}} =
+      inventory =
+        Ashex.run_create!(SevenEleven.Inventory, :create,
+          params: %{store_id: store.id, product_id: product.id, count: 10}
+        )
+
+      # invalid time
+      assert {:error, %Ash.Error.Forbidden{path: []}} =
                Ashex.run_update(store, :purchase,
                  actor: customer,
-                 params: %{time: ~T[11:00:00], product_id: product.id}
+                 params: %{time: ~T[11:00:00], inventory: %{id: inventory.id, count: 1}}
                )
 
-      assert {:error, %{}} =
+      # invalid count
+      assert {:error, %Ash.Error.Forbidden{path: [:inventory, 0]}} =
+               Ashex.run_update(store, :purchase,
+                 actor: customer,
+                 params: %{time: ~T[16:00:00], inventory: %{id: inventory.id, count: 100}}
+               )
+
+      # invalid age
+      assert {:error, %Ash.Error.Forbidden{path: [:inventory, 0, :product_id, 0]}} =
                Ashex.run_update(store, :purchase,
                  actor: minor,
-                 params: %{time: ~T[16:00:00], product_id: product.id}
+                 params: %{time: ~T[16:00:00], inventory: %{id: inventory.id, count: 1}}
                )
 
-      assert {:ok, %{}} =
-               Ashex.run_update(store, :purchase,
-                 actor: customer,
-                 params: %{time: ~T[16:00:00], product_id: product.id}
-               )
+      assert Ashex.run_update!(store, :purchase,
+               actor: customer,
+               params: %{time: ~T[16:00:00], inventory: %{id: inventory.id, count: 1}}
+             )
     end
   end
 end

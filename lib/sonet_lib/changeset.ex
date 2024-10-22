@@ -10,6 +10,7 @@ defmodule SonetLib.Changeset do
        for_update: 4,
        get_argument: 2,
        get_attribute: 2,
+       manage_relationship: 4,
        set_argument: 3
      ]}
   ]

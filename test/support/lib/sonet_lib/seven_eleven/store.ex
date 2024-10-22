@@ -15,14 +15,14 @@ defmodule SonetLib.SevenEleven.Store do
     defaults [:read, create: :*]
 
     update :purchase do
+      primary? true
       require_atomic? false
       argument :time, :time, allow_nil?: false
-      argument :product_id, :string, allow_nil?: false
+      argument :inventory, :map, allow_nil?: false
 
-      change manage_relationship(:product_id, :products,
-               on_no_match: :error,
-               on_match: {:update, :purchase},
-               value_is_key: :id
+      change manage_relationship(:inventory, :inventories,
+               on_lookup: :error,
+               on_match: {:update, :purchase}
              )
     end
   end
@@ -38,8 +38,7 @@ defmodule SonetLib.SevenEleven.Store do
 
     policy action(:purchase) do
       forbid_unless expr(open_time < ^arg(:time))
-      forbid_unless expr(^arg(:time) < close_time)
-      authorize_if always()
+      authorize_if expr(^arg(:time) < close_time)
     end
   end
 
@@ -50,7 +49,7 @@ defmodule SonetLib.SevenEleven.Store do
   end
 
   relationships do
-    has_many :products, SevenEleven.Product, destination_attribute: :store_id
+    has_many :inventories, SevenEleven.Inventory, destination_attribute: :store_id
     has_many :transactions, SevenEleven.Transaction, destination_attribute: :store_id
   end
 end
