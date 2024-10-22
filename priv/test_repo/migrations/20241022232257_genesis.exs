@@ -8,14 +8,6 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
   use Ecto.Migration
 
   def up do
-    create table(:transaction, primary_key: false) do
-      add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
-      add :count, :bigint, null: false
-      add :customer_id, :uuid, null: false
-      add :store_id, :uuid, null: false
-      add :product_id, :uuid, null: false
-    end
-
     create table(:store, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
       add :open_time, :time, null: false
@@ -61,56 +53,11 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
 
     create table(:customer, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
-    end
-
-    alter table(:transaction) do
-      modify :customer_id,
-             references(:customer,
-               column: :id,
-               name: "transaction_customer_id_fkey",
-               type: :uuid,
-               prefix: "public"
-             )
-
-      modify :store_id,
-             references(:store,
-               column: :id,
-               name: "transaction_store_id_fkey",
-               type: :uuid,
-               prefix: "public"
-             )
-
-      modify :product_id,
-             references(:product,
-               column: :id,
-               name: "transaction_product_id_fkey",
-               type: :uuid,
-               prefix: "public"
-             )
-    end
-
-    alter table(:customer) do
       add :age, :bigint, null: false
     end
   end
 
   def down do
-    alter table(:customer) do
-      remove :age
-    end
-
-    drop constraint(:transaction, "transaction_customer_id_fkey")
-
-    drop constraint(:transaction, "transaction_store_id_fkey")
-
-    drop constraint(:transaction, "transaction_product_id_fkey")
-
-    alter table(:transaction) do
-      modify :product_id, :uuid
-      modify :store_id, :uuid
-      modify :customer_id, :uuid
-    end
-
     drop table(:customer)
 
     drop constraint(:inventory, "inventory_store_id_fkey")
@@ -124,7 +71,5 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
     drop table(:product)
 
     drop table(:store)
-
-    drop table(:transaction)
   end
 end
