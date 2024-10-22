@@ -12,6 +12,7 @@ defmodule Sonet.Forum.Article do
 
   json_api do
     type "article"
+    includes author: []
   end
 
   postgres do
