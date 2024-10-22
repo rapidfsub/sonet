@@ -1,7 +1,7 @@
 defmodule SonetLib.Ash.Policies.AccessTypeTest do
   use SonetLib.DataCase
 
-  defmodule Article do
+  defmodule Object do
     use Ash.Resource,
       domain: SonetLib.TestDomain,
       authorizers: [Ash.Policy.Authorizer]
@@ -45,17 +45,17 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
 
   describe "create action" do
     test "pass if authorized" do
-      assert Ashex.run_create!(Article, :create)
+      assert Ashex.run_create!(Object, :create)
     end
 
     test "raise error if filtered" do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Ashex.run_create(Article, :filtered_create)
+               Ashex.run_create(Object, :filtered_create)
     end
 
     test "raise error if forbidden" do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Ashex.run_create(Article, :forbidden_create)
+               Ashex.run_create(Object, :forbidden_create)
     end
   end
 
@@ -63,7 +63,7 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
     setup do
       data =
         for _ <- 1..10 do
-          %Article{}
+          %Object{}
         end
         |> Ashex.seed!()
 
@@ -71,16 +71,16 @@ defmodule SonetLib.Ash.Policies.AccessTypeTest do
     end
 
     test "pass if authorized", %{data: data} do
-      assert [_ | _] = Ashex.set_data_and_read!(Article, :read, data)
+      assert [_ | _] = Ashex.set_data_and_read!(Object, :read, data)
     end
 
     test "remove unauthorized records if filtered", %{data: data} do
-      assert [] = Ashex.set_data_and_read!(Article, :filtered_read, data)
+      assert [] = Ashex.set_data_and_read!(Object, :filtered_read, data)
     end
 
     test "raise error if forbidden", %{data: data} do
       assert {:error, %Ash.Error.Forbidden{}} =
-               Ashex.set_data_and_read(Article, :forbidden_read, data)
+               Ashex.set_data_and_read(Object, :forbidden_read, data)
     end
   end
 end
