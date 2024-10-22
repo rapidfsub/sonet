@@ -15,7 +15,7 @@ defmodule Sonet.DataCase do
   """
 
   use ExUnit.CaseTemplate
-  use Sonet.Prelude
+  use Sonet.TestPrelude
 
   using do
     quote do
@@ -28,13 +28,20 @@ defmodule Sonet.DataCase do
 
       # added
       import AssertValue
-      use Sonet.Prelude
+      use Sonet.TestPrelude
     end
   end
 
   setup tags do
     Sonet.DataCase.setup_sandbox(tags)
     :ok
+  end
+
+  setup do
+    account = insert!(Identity.Account, variant: :with_token)
+    token = account.__metadata__.token
+    account0 = insert!(Identity.Account)
+    ~M{account, token, account0}
   end
 
   @doc """

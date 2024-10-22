@@ -1,6 +1,6 @@
 defmodule SonetWeb.JsonApiCase do
   use ExUnit.CaseTemplate
-  use SonetWeb.Prelude
+  use SonetWeb.TestPrelude
 
   using do
     quote do
@@ -16,7 +16,7 @@ defmodule SonetWeb.JsonApiCase do
 
       # added
       import AssertValue
-      use SonetWeb.Prelude
+      use SonetWeb.TestPrelude
     end
   end
 
@@ -28,5 +28,12 @@ defmodule SonetWeb.JsonApiCase do
       |> Conn.put_req_header("content-type", "application/vnd.api+json")
 
     ~M{conn}
+  end
+
+  setup do
+    account = insert!(Identity.Account, variant: :with_token)
+    token = account.__metadata__.token
+    account0 = insert!(Identity.Account)
+    ~M{account, token, account0}
   end
 end

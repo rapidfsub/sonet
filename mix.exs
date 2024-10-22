@@ -52,6 +52,7 @@ defmodule Sonet.MixProject do
       {:redoc_ui_plug, ">= 0.0.0"},
       # dev deps
       {:assert_value, ">= 0.0.0", only: [:dev, :test]},
+      {:smokestack, ">= 0.0.0", only: [:test]},
       # phoenix deps
       {:phoenix, ">= 0.0.0"},
       {:phoenix_ecto, ">= 0.0.0"},
