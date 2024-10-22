@@ -1,6 +1,7 @@
 import Config
 
 config :ash, disable_async?: true
+config :bcrypt_elixir, log_rounds: 1
 config :sonet, token_signing_secret: "vIGKjm1kVLPEuCXC10v8pinjcdNNPV/P"
 
 # Avoid timeouts while waiting for user input in assert_value
