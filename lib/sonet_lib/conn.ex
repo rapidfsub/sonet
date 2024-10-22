@@ -11,4 +11,8 @@ defmodule SonetLib.Conn do
        put_req_header: 3
      ]}
   ]
+
+  def put_bearer_token(conn, token) do
+    put_req_header(conn, "authorization", "Bearer " <> token)
+  end
 end
