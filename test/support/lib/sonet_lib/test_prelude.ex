@@ -3,7 +3,6 @@ defmodule SonetLib.TestPrelude do
     quote do
       use SonetLib.Prelude
       alias SonetLib.SevenEleven
-      alias SonetLib.Shopify
       alias SonetLib.TestIdentity
       alias SonetLib.TestRepo
     end
