@@ -17,8 +17,8 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "handle",
-      "type": "citext"
+      "source": "count",
+      "type": "bigint"
     },
     {
       "allow_nil?": false,
@@ -38,15 +38,44 @@
           "global": null,
           "strategy": null
         },
-        "name": "store_user_id_fkey",
+        "name": "inventory_store_id_fkey",
         "on_delete": null,
         "on_update": null,
         "primary_key?": true,
         "schema": "public",
-        "table": "user"
+        "table": "store"
       },
       "size": null,
-      "source": "user_id",
+      "source": "store_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "inventory_product_id_fkey",
+        "on_delete": null,
+        "on_update": null,
+        "primary_key?": true,
+        "schema": "public",
+        "table": "product"
+      },
+      "size": null,
+      "source": "product_id",
       "type": "uuid"
     }
   ],
@@ -55,23 +84,8 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "2BE4171773834F2E6F5E477EC1F007EF452CB1A259E65A87798D4E7ED30D694F",
-  "identities": [
-    {
-      "all_tenants?": false,
-      "base_filter": null,
-      "index_name": "store_unique_handle_index",
-      "keys": [
-        {
-          "type": "atom",
-          "value": "handle"
-        }
-      ],
-      "name": "unique_handle",
-      "nils_distinct?": true,
-      "where": null
-    }
-  ],
+  "hash": "C24ACDCAA159921B9B98E2D830C8CB9420A87489AAC36597924810CF738211BF",
+  "identities": [],
   "multitenancy": {
     "attribute": null,
     "global": null,
@@ -79,5 +93,5 @@
   },
   "repo": "Elixir.SonetLib.TestRepo",
   "schema": null,
-  "table": "store"
+  "table": "inventory"
 }
