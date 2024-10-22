@@ -37,6 +37,12 @@ defmodule SonetLib.DataCase do
     :ok
   end
 
+  setup do
+    user = Ashex.run_create!(TestIdentity.User, :create, params: %{email: Fake.email()})
+    user0 = Ashex.run_create!(TestIdentity.User, :create, params: %{email: Fake.email()})
+    ~M{user, user0}
+  end
+
   @doc """
   Sets up the sandbox based on the test tags.
   """
