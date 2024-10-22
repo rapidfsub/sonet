@@ -1,7 +1,7 @@
 defmodule SonetLib.Ash.Type.DecimalTest do
   use SonetLib.DataCase
 
-  defmodule BankAccount do
+  defmodule Object do
     use Ash.Resource,
       domain: SonetLib.TestDomain
 
@@ -16,7 +16,7 @@ defmodule SonetLib.Ash.Type.DecimalTest do
   end
 
   test "Decimal.equal?/2 handles nil" do
-    assert ba = Ashex.run_create!(BankAccount, :create, params: %{balance: 100})
+    assert ba = Ashex.run_create!(Object, :create, params: %{balance: 100})
     assert {:error, %{}} = Ashex.run_update(ba, :update, params: %{balance: nil})
   end
 end

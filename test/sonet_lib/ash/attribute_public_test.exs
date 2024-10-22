@@ -2,13 +2,13 @@ defmodule SonetLib.Ash.AttributePublicTest do
   use SonetLib.DataCase
 
   test "cannot accept non public attribute using :*" do
-    defmodule Article1 do
+    defmodule Object1 do
       use Ash.Resource,
         domain: SonetLib.TestDomain
 
       attributes do
         uuid_v7_primary_key :id
-        attribute :title, :string, allow_nil?: false
+        attribute :name, :string, allow_nil?: false
       end
 
       actions do
@@ -16,36 +16,36 @@ defmodule SonetLib.Ash.AttributePublicTest do
       end
     end
 
-    assert {:error, %{}} = Ashex.run_create(Article1, :create, params: %{title: Fake.sentence()})
+    assert {:error, %{}} = Ashex.run_create(Object1, :create, params: %{name: Fake.sentence()})
   end
 
   test "accept non public attribute with explicit whitelist" do
-    defmodule Article2 do
+    defmodule Object2 do
       use Ash.Resource,
         domain: SonetLib.TestDomain
 
       attributes do
         uuid_v7_primary_key :id
-        attribute :title, :string, allow_nil?: false
+        attribute :name, :string, allow_nil?: false
       end
 
       actions do
-        defaults create: [:title]
+        defaults create: [:name]
       end
     end
 
-    title = Fake.sentence()
-    assert %{title: ^title} = Ashex.run_create!(Article2, :create, params: %{title: title})
+    name = Fake.sentence()
+    assert %{name: ^name} = Ashex.run_create!(Object2, :create, params: %{name: name})
   end
 
   test "accept public attribute using :*" do
-    defmodule Article3 do
+    defmodule Object3 do
       use Ash.Resource,
         domain: SonetLib.TestDomain
 
       attributes do
         uuid_v7_primary_key :id
-        attribute :title, :string, allow_nil?: false, public?: true
+        attribute :name, :string, allow_nil?: false, public?: true
       end
 
       actions do
@@ -53,7 +53,7 @@ defmodule SonetLib.Ash.AttributePublicTest do
       end
     end
 
-    title = Fake.sentence()
-    assert %{title: ^title} = Ashex.run_create!(Article3, :create, params: %{title: title})
+    name = Fake.sentence()
+    assert %{name: ^name} = Ashex.run_create!(Object3, :create, params: %{name: name})
   end
 end

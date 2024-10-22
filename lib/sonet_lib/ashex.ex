@@ -87,6 +87,16 @@ defmodule SonetLib.Ashex do
     get_in(get_actor(ctx).id)
   end
 
+  def run_read(query, action_name, opts1 \\ [], opts2 \\ []) do
+    {params, opts} = pop_params(opts1, opts2)
+    Query.for_read(query, action_name, params, opts) |> read()
+  end
+
+  def run_read!(query, action_name, opts1 \\ [], opts2 \\ []) do
+    {params, opts} = pop_params(opts1, opts2)
+    Query.for_read(query, action_name, params, opts) |> read!()
+  end
+
   def run_read_one(query, action_name, opts1 \\ [], opts2 \\ []) do
     {params, opts} = pop_params(opts1, opts2)
     Query.for_read(query, action_name, params, opts) |> read_one()
