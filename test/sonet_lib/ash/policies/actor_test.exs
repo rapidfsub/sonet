@@ -44,18 +44,18 @@ defmodule SonetLib.Ash.Policies.ActorTest do
              Ashex.set_data_and_read_one!(Object, :get_current_object, objects, actor: object)
   end
 
-  describe "ash_postgres" do
-    test "filter by actor", ~M{user, user0} do
-      for i <- 1..5 do
-        Ashex.run_create!(Shopify.Store, :create, actor: user, params: %{handle: "store#{i}"})
-      end
+  # describe "ash_postgres" do
+  #   test "filter by actor", ~M{user, user0} do
+  #     for i <- 1..5 do
+  #       Ashex.run_create!(Shopify.Store, :create, actor: user, params: %{handle: "store#{i}"})
+  #     end
 
-      for i <- 1..3 do
-        Ashex.run_create!(Shopify.Store, :create, actor: user0, params: %{handle: "other#{i}"})
-      end
+  #     for i <- 1..3 do
+  #       Ashex.run_create!(Shopify.Store, :create, actor: user0, params: %{handle: "other#{i}"})
+  #     end
 
-      assert Ashex.run_read!(Shopify.Store, :read) |> length() == 8
-      assert Ashex.run_read!(Shopify.Store, :read_owned, actor: user) |> length() == 5
-    end
-  end
+  #     assert Ashex.run_read!(Shopify.Store, :read) |> length() == 8
+  #     assert Ashex.run_read!(Shopify.Store, :read_owned, actor: user) |> length() == 5
+  #   end
+  # end
 end

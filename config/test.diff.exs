@@ -17,9 +17,7 @@ config :sonet,
     Sonet.Forum,
     Sonet.Identity,
     SonetLib.SevenEleven,
-    SonetLib.Shopify,
-    SonetLib.TestDomain,
-    SonetLib.TestIdentity
+    SonetLib.TestDomain
   ]
 
 config :sonet,

@@ -8,7 +8,6 @@ defmodule SonetLib.SevenEleven.Transaction do
 
   postgres do
     repo TestRepo
-    schema "seven_eleven"
     table "transaction"
   end
 

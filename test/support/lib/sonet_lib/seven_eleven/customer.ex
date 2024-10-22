@@ -8,7 +8,6 @@ defmodule SonetLib.SevenEleven.Customer do
 
   postgres do
     repo TestRepo
-    schema "seven_eleven"
     table "customer"
   end
 
