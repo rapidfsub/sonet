@@ -38,8 +38,10 @@ defmodule Sonet.DataCase do
   end
 
   setup do
-    account = insert!(Identity.Account)
-    ~M{account}
+    account = insert!(Identity.Account, variant: :with_token)
+    token = account.__metadata__.token
+    account0 = insert!(Identity.Account)
+    ~M{account, token, account0}
   end
 
   @doc """
