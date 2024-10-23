@@ -44,4 +44,11 @@ defmodule SonetLib.AshStateMachine.CommonTest do
     assert {:error, %Ash.Error.Forbidden{}} =
              Ashex.run_create(Object, :create, params: %{state: :done})
   end
+
+  test "fail when progress twice" do
+    assert object = Ashex.run_create!(Object, :create)
+    assert %{state: :done} = object = Ashex.run_update!(object, :progress)
+    assert Ashex.can?({object, :progress}, nil) == false
+    assert {:error, %Ash.Error.Forbidden{}} = Ashex.run_update(object, :progress, actor: nil)
+  end
 end
