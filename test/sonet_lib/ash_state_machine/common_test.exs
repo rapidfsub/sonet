@@ -4,6 +4,7 @@ defmodule SonetLib.AshStateMachine.CommonTest do
   defmodule Object do
     use Ash.Resource,
       domain: SonetLib.TestDomain,
+      authorizers: [Ash.Policy.Authorizer],
       extensions: [AshStateMachine]
 
     attributes do
@@ -26,6 +27,12 @@ defmodule SonetLib.AshStateMachine.CommonTest do
         change transition_state(:done)
       end
     end
+
+    policies do
+      policy always() do
+        authorize_if AshStateMachine.Checks.ValidNextState
+      end
+    end
   end
 
   test "test transition_state" do
@@ -33,7 +40,8 @@ defmodule SonetLib.AshStateMachine.CommonTest do
     assert %{state: :done} = Ashex.run_update!(object, :progress)
   end
 
-  test "create with non initial state" do
-    assert Ashex.run_create!(Object, :create)
+  test "prevent create with non initial state by AshStateMachine.Checks.ValidNextState" do
+    assert {:error, %Ash.Error.Forbidden{}} =
+             Ashex.run_create(Object, :create, params: %{state: :done})
   end
 end
