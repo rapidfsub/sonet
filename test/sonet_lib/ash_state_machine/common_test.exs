@@ -3,7 +3,7 @@ defmodule SonetLib.AshStateMachine.CommonTest do
 
   defmodule Object do
     use Ash.Resource,
-      domain: SonetLib.TestDomain,
+      domain: TestDomain,
       authorizers: [Ash.Policy.Authorizer],
       extensions: [AshStateMachine]
 

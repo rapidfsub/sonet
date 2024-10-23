@@ -4,7 +4,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
   test "policy conditions are combined with and" do
     defmodule Object1 do
       use Ash.Resource,
-        domain: SonetLib.TestDomain,
+        domain: TestDomain,
         authorizers: [Ash.Policy.Authorizer]
 
       attributes do
@@ -40,7 +40,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
 
     defmodule Object2 do
       use Ash.Resource,
-        domain: SonetLib.TestDomain,
+        domain: TestDomain,
         authorizers: [Ash.Policy.Authorizer],
         fragments: [
           Object2Fragment
@@ -67,7 +67,7 @@ defmodule SonetLib.Ash.Policies.CommonTest do
   test "not every check in a policy must pass" do
     defmodule Object3 do
       use Ash.Resource,
-        domain: SonetLib.TestDomain,
+        domain: TestDomain,
         authorizers: [Ash.Policy.Authorizer]
 
       attributes do

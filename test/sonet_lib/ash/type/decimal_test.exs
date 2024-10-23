@@ -3,7 +3,7 @@ defmodule SonetLib.Ash.Type.DecimalTest do
 
   defmodule Object do
     use Ash.Resource,
-      domain: SonetLib.TestDomain
+      domain: TestDomain
 
     attributes do
       uuid_v7_primary_key :id
