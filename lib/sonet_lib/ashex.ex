@@ -4,6 +4,8 @@ defmodule SonetLib.Ashex do
   use Delegate, [
     {Ash,
      [
+       can: 3,
+       can?: 3,
        create: 3,
        create!: 3,
        destroy: 2,
