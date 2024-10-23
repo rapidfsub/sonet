@@ -17,37 +17,18 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "is_adult_only",
-      "type": "boolean"
+      "source": "open_time",
+      "type": "time"
     },
     {
       "allow_nil?": false,
       "default": "nil",
       "generated?": false,
       "primary_key?": false,
-      "references": {
-        "deferrable": false,
-        "destination_attribute": "id",
-        "destination_attribute_default": null,
-        "destination_attribute_generated": null,
-        "index?": false,
-        "match_type": null,
-        "match_with": null,
-        "multitenancy": {
-          "attribute": null,
-          "global": null,
-          "strategy": null
-        },
-        "name": "product_store_id_fkey",
-        "on_delete": null,
-        "on_update": null,
-        "primary_key?": true,
-        "schema": "public",
-        "table": "store"
-      },
+      "references": null,
       "size": null,
-      "source": "store_id",
-      "type": "uuid"
+      "source": "close_time",
+      "type": "time"
     }
   ],
   "base_filter": null,
@@ -55,7 +36,7 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "12E14AC6CE9B4D44610F7A9BF25B8F1942AA36DA1D2F6C3B73F71AAE4360DD86",
+  "hash": "91922B0AB56D21FDA91E7375FAE9482938EFDC2C5C098221CF7DFD9739987D5C",
   "identities": [],
   "multitenancy": {
     "attribute": null,
@@ -63,6 +44,6 @@
     "strategy": null
   },
   "repo": "Elixir.SonetLib.TestRepo",
-  "schema": null,
-  "table": "product"
+  "schema": "seven_eleven",
+  "table": "store"
 }

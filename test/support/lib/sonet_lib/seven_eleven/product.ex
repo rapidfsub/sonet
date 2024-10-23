@@ -8,6 +8,7 @@ defmodule SonetLib.SevenEleven.Product do
 
   postgres do
     repo TestRepo
+    schema "seven_eleven"
     table "product"
   end
 
@@ -21,9 +22,7 @@ defmodule SonetLib.SevenEleven.Product do
       change manage_relationship(:store_id, :store, type: :append, value_is_key: :id)
     end
 
-    update :purchase do
-      require_atomic? false
-    end
+    update :purchase
   end
 
   policies do
@@ -36,6 +35,7 @@ defmodule SonetLib.SevenEleven.Product do
     end
 
     policy action(:purchase) do
+      access_type :strict
       forbid_unless actor_present()
       authorize_if expr(not is_adult_only or ^actor(:age) >= 19)
     end
