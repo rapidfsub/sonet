@@ -8,6 +8,7 @@ defmodule SonetLib.SevenEleven.Product do
 
   postgres do
     repo TestRepo
+    schema "seven_eleven"
     table "product"
   end
 
