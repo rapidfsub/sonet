@@ -8,13 +8,13 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
   use Ecto.Migration
 
   def up do
-    create table(:store, primary_key: false) do
+    create table(:store, primary_key: false, prefix: "seven_eleven") do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
       add :open_time, :time, null: false
       add :close_time, :time, null: false
     end
 
-    create table(:product, primary_key: false) do
+    create table(:product, primary_key: false, prefix: "seven_eleven") do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
       add :is_adult_only, :boolean, null: false
 
@@ -23,12 +23,12 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
             column: :id,
             name: "product_store_id_fkey",
             type: :uuid,
-            prefix: "public"
+            prefix: "seven_eleven"
           ),
           null: false
     end
 
-    create table(:inventory, primary_key: false) do
+    create table(:inventory, primary_key: false, prefix: "seven_eleven") do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
       add :count, :bigint, null: false
 
@@ -37,7 +37,7 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
             column: :id,
             name: "inventory_store_id_fkey",
             type: :uuid,
-            prefix: "public"
+            prefix: "seven_eleven"
           ),
           null: false
 
@@ -46,30 +46,30 @@ defmodule SonetLib.TestRepo.Migrations.Genesis do
             column: :id,
             name: "inventory_product_id_fkey",
             type: :uuid,
-            prefix: "public"
+            prefix: "seven_eleven"
           ),
           null: false
     end
 
-    create table(:customer, primary_key: false) do
+    create table(:customer, primary_key: false, prefix: "seven_eleven") do
       add :id, :uuid, null: false, default: fragment("uuid_generate_v7()"), primary_key: true
       add :age, :bigint, null: false
     end
   end
 
   def down do
-    drop table(:customer)
+    drop table(:customer, prefix: "seven_eleven")
 
-    drop constraint(:inventory, "inventory_store_id_fkey")
+    drop constraint(:inventory, "inventory_store_id_fkey", prefix: "seven_eleven")
 
-    drop constraint(:inventory, "inventory_product_id_fkey")
+    drop constraint(:inventory, "inventory_product_id_fkey", prefix: "seven_eleven")
 
-    drop table(:inventory)
+    drop table(:inventory, prefix: "seven_eleven")
 
-    drop constraint(:product, "product_store_id_fkey")
+    drop constraint(:product, "product_store_id_fkey", prefix: "seven_eleven")
 
-    drop table(:product)
+    drop table(:product, prefix: "seven_eleven")
 
-    drop table(:store)
+    drop table(:store, prefix: "seven_eleven")
   end
 end

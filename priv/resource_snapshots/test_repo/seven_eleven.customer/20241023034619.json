@@ -17,18 +17,8 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "open_time",
-      "type": "time"
-    },
-    {
-      "allow_nil?": false,
-      "default": "nil",
-      "generated?": false,
-      "primary_key?": false,
-      "references": null,
-      "size": null,
-      "source": "close_time",
-      "type": "time"
+      "source": "age",
+      "type": "bigint"
     }
   ],
   "base_filter": null,
@@ -36,7 +26,7 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "55C184CE9583977E43FBE4DC79FA65809524A0E6094AF0C9775A345A28BBDBEC",
+  "hash": "69F5FDE0DB90F5DB8F91A8E8E5DADD125C28B956E22E5D1956690A7CF7BF619A",
   "identities": [],
   "multitenancy": {
     "attribute": null,
@@ -44,6 +34,6 @@
     "strategy": null
   },
   "repo": "Elixir.SonetLib.TestRepo",
-  "schema": null,
-  "table": "store"
+  "schema": "seven_eleven",
+  "table": "customer"
 }

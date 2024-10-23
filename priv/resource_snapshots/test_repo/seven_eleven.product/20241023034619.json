@@ -17,8 +17,8 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "count",
-      "type": "bigint"
+      "source": "is_adult_only",
+      "type": "boolean"
     },
     {
       "allow_nil?": false,
@@ -38,44 +38,15 @@
           "global": null,
           "strategy": null
         },
-        "name": "inventory_store_id_fkey",
+        "name": "product_store_id_fkey",
         "on_delete": null,
         "on_update": null,
         "primary_key?": true,
-        "schema": "public",
+        "schema": "seven_eleven",
         "table": "store"
       },
       "size": null,
       "source": "store_id",
-      "type": "uuid"
-    },
-    {
-      "allow_nil?": false,
-      "default": "nil",
-      "generated?": false,
-      "primary_key?": false,
-      "references": {
-        "deferrable": false,
-        "destination_attribute": "id",
-        "destination_attribute_default": null,
-        "destination_attribute_generated": null,
-        "index?": false,
-        "match_type": null,
-        "match_with": null,
-        "multitenancy": {
-          "attribute": null,
-          "global": null,
-          "strategy": null
-        },
-        "name": "inventory_product_id_fkey",
-        "on_delete": null,
-        "on_update": null,
-        "primary_key?": true,
-        "schema": "public",
-        "table": "product"
-      },
-      "size": null,
-      "source": "product_id",
       "type": "uuid"
     }
   ],
@@ -84,7 +55,7 @@
   "custom_indexes": [],
   "custom_statements": [],
   "has_create_action": true,
-  "hash": "C24ACDCAA159921B9B98E2D830C8CB9420A87489AAC36597924810CF738211BF",
+  "hash": "55569B283F9BFBDA0F28FB4A16BA52C2CC3C271D80B21D344AEEA9E51FD9AFA0",
   "identities": [],
   "multitenancy": {
     "attribute": null,
@@ -92,6 +63,6 @@
     "strategy": null
   },
   "repo": "Elixir.SonetLib.TestRepo",
-  "schema": null,
-  "table": "inventory"
+  "schema": "seven_eleven",
+  "table": "product"
 }
