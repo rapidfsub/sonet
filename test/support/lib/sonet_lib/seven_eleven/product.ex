@@ -35,7 +35,6 @@ defmodule SonetLib.SevenEleven.Product do
     end
 
     policy action(:purchase) do
-      access_type :strict
       forbid_unless actor_present()
       authorize_if expr(not is_adult_only or ^actor(:age) >= 19)
     end
