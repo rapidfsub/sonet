@@ -4,7 +4,7 @@ defmodule SonetLib.Ash.ChangesTest do
   test "local changes precede global changes" do
     defmodule Object do
       use Ash.Resource,
-        domain: SonetLib.TestDomain
+        domain: TestDomain
 
       attributes do
         uuid_v7_primary_key :id

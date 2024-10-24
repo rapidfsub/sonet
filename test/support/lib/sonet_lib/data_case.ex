@@ -21,9 +21,9 @@ defmodule SonetLib.DataCase do
     quote do
       # alias SonetLib.TestRepo
 
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
+      # import Ecto
+      # import Ecto.Changeset
+      # import Ecto.Query
       import SonetLib.DataCase
 
       # added

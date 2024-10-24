@@ -3,7 +3,7 @@ defmodule SonetLib.Ash.Policies.ActorTest do
 
   defmodule Object do
     use Ash.Resource,
-      domain: SonetLib.TestDomain,
+      domain: TestDomain,
       authorizers: [Ash.Policy.Authorizer]
 
     attributes do
