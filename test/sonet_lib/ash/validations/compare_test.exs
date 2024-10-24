@@ -31,6 +31,9 @@ defmodule SonetLib.Ash.Validations.CompareTest do
       end
     end
 
+    assert {:error, %Ash.Error.Invalid{}} =
+             Ashex.run_create(Object1, :create, params: %{percent: -100})
+
     assert %{less_than_half: true} = Ashex.run_create!(Object1, :create, params: %{percent: 15})
 
     assert_raise FunctionClauseError, fn ->
