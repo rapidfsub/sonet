@@ -33,7 +33,7 @@ defmodule SonetLib.Ash.Validations.OnlyWhenValidTest do
       end
     end
 
-    assert Ashex.run_create!(Object1, :create, params: %{x: 1, y: 2})
+    assert %{} = Ashex.run_create!(Object1, :create, params: %{x: 1, y: 2})
 
     assert_raise ArithmeticError, fn ->
       Ashex.run_create(Object1, :create, params: %{x: nil, y: 2})
